@@ -1,6 +1,7 @@
-
-<label for="user-input">Enter Username:</label>
-<input type="text" id="user-input" #userCredential>
-<button (click)="emitSignIn(userCredential.value)" class="card card-small" tabindex="0"> 
-    <span>Sign in / Register</span>
-</button>
+<div class="loginContainer">
+    <label for="user-input">Enter Username:</label>
+    <input type="text" id="user-input" #userCredential>
+    <button (click)="emitSignIn(userCredential.value)" class="card card-small" tabindex="0">
+        <span>Sign in / Register</span>
+    </button>
+</div>

@@ -21,7 +21,6 @@ export class AppComponent {
   constructor(private userService: LoginService) {
   }
 
-
   signOut() : void {
     this.isSignedIn = this.userService.signOut();
     this.currentUser = this.userService.signedInUser;
@@ -38,7 +37,7 @@ export class AppComponent {
   }
   isMenuOpen = false;
 
-  setNavigation(navigateTo: string) {
+  setNavigation(navigateTo: string) : void {
     this.navigateTo = navigateTo;
     console.log(navigateTo);
   }
