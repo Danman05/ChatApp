@@ -1,0 +1,24 @@
+<div class="userInfoContainer" *ngIf="currentUser">
+
+    <div class="userInfoTop">
+        <img src="{{ currentUser.profilePicturePath }}"> 
+        <h1>{{ currentUser.displayName}}</h1>
+        <h2>@{{ currentUser.username }}</h2>
+        <div class="followCounts">
+            <table>
+                <tr>
+                    <td>Followers</td>
+                    <td>Following</td>
+                </tr>
+                <tr>
+                    <td>{{ currentUser.followerCount }}</td>
+                    <td>{{ currentUser.followingCount }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="userInfoBottom">
+        <h3>Join Date</h3>
+        <span>{{ currentUser.userJoinDate | date: 'dd/MM/YYYY' }}</span>
+    </div>
+</div>
