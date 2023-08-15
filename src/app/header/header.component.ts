@@ -7,18 +7,21 @@ import { User } from '../Model/userModel';
 })
 export class HeaderComponent {
 
-  @Input() userList!: User[];
-  @Input() currentUser!: User; 
   @Input() isSignedIn: boolean = false;
-  @Output() signIn = new EventEmitter<void>();
   @Output() signOut = new EventEmitter<void>();
-
+  @Output() navigation = new EventEmitter<string>();
+  showLogin: boolean = false;
   isMenuOpen = false;
 
-  emitSignIn() {
-    this.signIn.emit();
+  promptLogin() {
+    this.showLogin = true;
+  }
+
+  emitNavigation(navigateTo: string) : void{
+    this.navigation.emit(navigateTo);
   }
   emitSignOut() {
+    this.showLogin = false;
     this.signOut.emit();
   }
   toggleMenu(): void {

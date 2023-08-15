@@ -1,9 +1,14 @@
+<div class="homeContent">
 
-<div class="homeContent" *ngFor="let user of userList">
+    <h2>Welcome!</h2>
 
-    <h1> {{ user.displayName }} 
-        <span>({{ user.username }})</span>
-    </h1>
-    <h3> {{ user.userJoinDate | date: "dd/MM/YYYY HH:mm" }}</h3>
+    <p>list of users</p>
+    <div *ngFor="let user of userList">
 
+        <h1> {{ user.displayName }}
+            <span>({{ user.username }})</span>
+        </h1>
+        <h3> {{ user.userJoinDate | date: "dd/MM/YYYY HH:mm" }}</h3>
+
+    </div>
 </div>

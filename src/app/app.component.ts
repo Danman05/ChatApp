@@ -9,31 +9,39 @@ import { LoginService } from '../services/login.service';
 })
 export class AppComponent {
   title = 'ChatApp';
-  isSignedIn = false;
+  isSignedIn: boolean = false;
+  showLogin: boolean = false;
+  navigateTo: string = "";
   userList: User[] = [
     new User("Bobby", "Bobby123", "../../assets/guest.png"),
-    new User("Daniel", "Daniel@123", "../../assets/guest2.png")
+    new User("Daniel", "Daniel@123", "../../assets/guest2.png"),
+    new User("Test", "TestAccount000WOW", "", 1, 79817367362, false, true),
   ];
   currentUser!: User; 
   constructor(private userService: LoginService) {
-    this.currentUser = this.userList[0];
   }
 
 
   signOut() : void {
     this.isSignedIn = this.userService.signOut();
     this.currentUser = this.userService.signedInUser;
+    this.navigateTo = "homePage";
     console.log(this.isSignedIn);
     
   }
 
-  signIn() : void {
-    this.isSignedIn = this.userService.signIn();
+  signIn(credentials: string) : void {
+    console.log(credentials);
+    this.isSignedIn = this.userService.signIn(credentials);
     this.currentUser = this.userService.signedInUser;
     console.log(this.isSignedIn);
   }
   isMenuOpen = false;
 
+  setNavigation(navigateTo: string) {
+    this.navigateTo = navigateTo;
+    console.log(navigateTo);
+  }
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
   }

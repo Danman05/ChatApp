@@ -8,6 +8,7 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { SearchComponent } from './home-page/search/search.component';
 import { MessageContentComponent } from './home-page/message-content/message-content.component';
 import { HeaderComponent } from './header/header.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HeaderComponent } from './header/header.component';
     ProfilePageComponent,
     SearchComponent,
     MessageContentComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
