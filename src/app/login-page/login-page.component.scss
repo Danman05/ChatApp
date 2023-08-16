@@ -1,9 +1,68 @@
-.loginContainer {
+@import '../../variables.scss';
+
+.card {
+    all: unset;
+    border-radius: 16px;
+    border: 1px solid #eee;
+    background-color: $headerBtnColorY;
+    height: 40px;
+    width: 200px;
+    margin: 0 8px 16px;
+    padding: 16px;
     display: flex;
-    margin: 82px auto 32px;
-    padding: 0 16px;
-    max-width: 960px;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    text-align: center;
+    transition: all 0.2s ease-in-out;
+    line-height: 12px;
+}
+
+.card.card-small {
+    height: 16px;
+    width: 168px;
+    color: white;
+}
+
+.box {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 30px 60px;
+}
+.input-container {
+    position: relative;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    color: #000;
+}
+
+.input-container label {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    font-size: 16px;
+    transition: all 0.5s ease-in-out;
+}
+.input-container input {
+    border: 0;
+    border-bottom: 1px solid #555;
+    background: transparent;
+    width: 100%;
+    padding: 8px 0 5px 0;
+    font-size: 16px;
+}
+.input-container input:focus {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #000;
+}
+
+.input-container input:focus~label,
+.input-container input:valid~label {
+    top: -12px;
+    font-size: 12px;
+
 }

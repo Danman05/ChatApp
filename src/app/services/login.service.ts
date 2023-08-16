@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
-import { User } from '../app/Model/userModel';
+import { User } from '../Model/userModel';
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  isSignedIn : boolean = false;
-  signedInUser! : User;
+  signedInUser!: User;
   userList: User[] = [
     new User("Bobby", "Bobby123", "../../assets/guest.png"),
     new User("Daniel", "Daniel123Danny", "../../assets/guest2.png"),
     new User("Test", "TestAccount000WOW", "", 1, 79817367362, false, true),
   ];
 
-  signIn(username: string) {
-    let user = this.userList.find(x => x.displayName == username);
-    console.log("Found user: " + user);
+  signIn(credentials: any) {
+    let user = this.userList.find(x => x.displayName == credentials.username);
     if (user) {
       this.signedInUser = user;
       return true;

@@ -10,18 +10,13 @@ export class HeaderComponent {
   @Input() isSignedIn: boolean = false;
   @Output() signOut = new EventEmitter<void>();
   @Output() navigation = new EventEmitter<string>();
-  showLogin: boolean = false;
-  isMenuOpen = false;
 
-  promptLogin() {
-    this.showLogin = true;
-  }
+  isMenuOpen = false;
 
   emitNavigation(navigateTo: string) : void{
     this.navigation.emit(navigateTo);
   }
   emitSignOut() {
-    this.showLogin = false;
     this.signOut.emit();
   }
   toggleMenu(): void {

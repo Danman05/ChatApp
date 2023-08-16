@@ -2,7 +2,9 @@
 <nav id="my-first">
     <ul>
         <li class="logotype">
-            <a href="" (click)="emitNavigation('homePage')">SocialApp</a>
+            <a href="#" (click)="emitNavigation('homePage')">
+                <img src="../../assets/Ylogo.png" alt="Y-Logo" width="60" height="60">
+            </a>
         </li>
         <li class="burger" (click)="toggleMenu()">
             <i class="material-icons">{{ isMenuOpen ? "close" : "menu" }}</i>
