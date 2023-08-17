@@ -1,27 +1,5 @@
 @import '../../variables.scss';
 
-.card {
-    all: unset;
-    border-radius: 16px;
-    border: 1px solid #eee;
-    background-color: $headerBtnColorY;
-    height: 40px;
-    width: 200px;
-    margin: 0 8px 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s ease-in-out;
-    line-height: 12px;
-}
-
-.card.card-small {
-    height: 16px;
-    width: 168px;
-    color: white;
-}
 
 .box {
     position: absolute;
@@ -29,14 +7,15 @@
     top: 50%;
     transform: translate(-50%, -50%);
     border: 1px solid black;
-    border-radius: 3px;
+    border-radius: 10px;
     padding: 30px 60px;
+    background-color: rgba(0, 0, 0, 1);
 }
 .input-container {
     position: relative;
     margin-top: 25px;
     margin-bottom: 25px;
-    color: #000;
+    color: #FFF;
 }
 
 .input-container label {
@@ -53,11 +32,12 @@
     width: 100%;
     padding: 8px 0 5px 0;
     font-size: 16px;
+    color: #FFF;
 }
 .input-container input:focus {
     border: none;
     outline: none;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #FFF;
 }
 
 .input-container input:focus~label,
