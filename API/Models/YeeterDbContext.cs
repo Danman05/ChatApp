@@ -97,10 +97,12 @@ public partial class YeeterDbContext : DbContext
 
             entity.HasOne(d => d.FollowsUser).WithMany(p => p.UserFollowerFollowsUsers)
                 .HasForeignKey(d => d.FollowsUserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__UserFollo__follo__72C60C4A");
 
             entity.HasOne(d => d.ThisUser).WithMany(p => p.UserFollowerThisUsers)
                 .HasForeignKey(d => d.ThisUserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__UserFollo__thisU__71D1E811");
         });
         modelBuilder.Entity<FollowerResult>(entity => {
