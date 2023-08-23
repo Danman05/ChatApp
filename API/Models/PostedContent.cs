@@ -7,7 +7,7 @@ public partial class PostedContent
 {
     public int PostId { get; set; }
 
-    public int UserId { get; set; }
+    public int PosterUserId { get; set; }
 
     public string Title { get; set; } = null!;
 
@@ -15,5 +15,5 @@ public partial class PostedContent
 
     public DateTime? BlogCreationDate { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    public virtual User PosterUser { get; set; } = null!;
 }

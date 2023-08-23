@@ -19,16 +19,16 @@ public partial class YeeterDbContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    public virtual DbSet<Userfollower> Userfollowers { get; set; }
+    public virtual DbSet<UserFollower> UserFollowers { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-        
-    }
+    public virtual DbSet<NewUser> NewUsers { get; set; }
+
+    public virtual DbSet<FollowerResult> FollowerResults { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<PostedContent>(entity =>
         {
-            entity.HasKey(e => e.PostId).HasName("PK__PostedCo__DD0C73BA7659E4AF");
+            entity.HasKey(e => e.PostId).HasName("PK__PostedCo__DD0C73BA64B96FAF");
 
             entity.ToTable("PostedContent");
 
@@ -41,25 +41,23 @@ public partial class YeeterDbContext : DbContext
                 .HasMaxLength(500)
                 .IsUnicode(false)
                 .HasColumnName("content");
+            entity.Property(e => e.PosterUserId).HasColumnName("posterUserID");
             entity.Property(e => e.Title)
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("title");
-            entity.Property(e => e.UserId).HasColumnName("userID");
 
-            entity.HasOne(d => d.User).WithMany(p => p.PostedContents)
-                .HasForeignKey(d => d.UserId)
+            entity.HasOne(d => d.PosterUser).WithMany(p => p.PostedContents)
+                .HasForeignKey(d => d.PosterUserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__PostedCon__blogC__37A5467C");
+                .HasConstraintName("FK__PostedCon__poste__76969D2E");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__user__CB9A1CDF3CA8D686");
+            entity.HasKey(e => e.UserId).HasName("PK__User__CB9A1CDFD63CAF9F");
 
-            entity.ToTable("user");
-
-            entity.HasIndex(e => e.Username, "UQ__user__F3DBC572D0D7A21C").IsUnique();
+            entity.ToTable("User");
 
             entity.Property(e => e.UserId).HasColumnName("userID");
             entity.Property(e => e.AccountCreationDate)
@@ -70,30 +68,44 @@ public partial class YeeterDbContext : DbContext
                 .HasMaxLength(24)
                 .IsUnicode(false)
                 .HasColumnName("displayName");
+            entity.Property(e => e.IsPrivate).HasColumnName("isPrivate");
+            entity.Property(e => e.IsVerified).HasColumnName("isVerified");
             entity.Property(e => e.Password)
                 .HasMaxLength(32)
                 .IsUnicode(false)
                 .HasColumnName("password");
+            entity.Property(e => e.ProfilePicturePath)
+                .IsUnicode(false)
+                .HasColumnName("profilePicturePath");
             entity.Property(e => e.Username)
                 .HasMaxLength(24)
                 .IsUnicode(false)
                 .HasColumnName("username");
         });
 
-        modelBuilder.Entity<Userfollower>(entity =>
+        modelBuilder.Entity<UserFollower>(entity =>
         {
-            entity.HasKey(e => e.FollowId).HasName("PK__userfoll__71C045368A9D6738");
-
-            entity.ToTable("userfollowers");
+            entity.HasKey(e => e.FollowId).HasName("PK__UserFoll__71C0453649DFA857");
 
             entity.Property(e => e.FollowId).HasColumnName("followID");
-            entity.Property(e => e.FollowedUserId).HasColumnName("followedUserID");
-            entity.Property(e => e.UserId).HasColumnName("userID");
+            entity.Property(e => e.FollowDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("followDate");
+            entity.Property(e => e.FollowsUserId).HasColumnName("followsUserID");
+            entity.Property(e => e.ThisUserId).HasColumnName("thisUserID");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Userfollowers)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__userfollo__userI__2C3393D0");
+            entity.HasOne(d => d.FollowsUser).WithMany(p => p.UserFollowerFollowsUsers)
+                .HasForeignKey(d => d.FollowsUserId)
+                .HasConstraintName("FK__UserFollo__follo__72C60C4A");
+
+            entity.HasOne(d => d.ThisUser).WithMany(p => p.UserFollowerThisUsers)
+                .HasForeignKey(d => d.ThisUserId)
+                .HasConstraintName("FK__UserFollo__thisU__71D1E811");
+        });
+        modelBuilder.Entity<FollowerResult>(entity => {
+            entity.HasNoKey();
+            
         });
 
         OnModelCreatingPartial(modelBuilder);

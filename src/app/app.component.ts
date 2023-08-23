@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './Model/userModel';
 import { LoginService } from './services/login.service';
+import { UserCred } from './Model/userCred';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,7 @@ export class AppComponent implements OnInit {
     this.navigateTo = "homePage";
   }
 
-  signIn(credentials: any) : void {
+  signIn(credentials: UserCred) : void {
     this.isSignedIn = this.userService.signIn(credentials);
     this.currentUser = this.userService.signedInUser;
   }

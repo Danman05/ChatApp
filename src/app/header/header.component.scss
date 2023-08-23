@@ -3,25 +3,26 @@
 
 #my-first {
     margin-top: -15px;
-        
+    
     ul {
         list-style: none;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background: $headerColourY;
-        color: white;
+        background: $webPrimaryColor;
+        color: $webSecondaryColor;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     .burger {
         padding: 0 10px;
-        border-left: 1px solid #FFF;
+        border-left: 1px solid $webSecondaryColor;
         display: none;
+        width:300px;
         cursor: pointer;
 
         i {
-            color: #FFF;
+            color: $webSecondaryColor;
             line-height: $menuHeight;
         }
 
@@ -32,17 +33,14 @@
 
     .menu {
         display: flex;
-        align-items: center;
+        // align-items: center;
 
         @media (max-width: $menuBreakpoint) {
             display: none;
 
             &.is-open {
                 display: block;
-                position: absolute;
-                top: #{$menuHeight + 2};
-                background:transparent;
-                width: 100%;
+                position: relative;
             }
         }
     }
