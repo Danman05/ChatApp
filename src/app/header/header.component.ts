@@ -13,10 +13,10 @@ export class HeaderComponent {
 
   isMenuOpen = false;
 
-  emitNavigation(navigateTo: string) : void{
+  emitNavigation(navigateTo: string): void{
     this.navigation.emit(navigateTo);
   }
-  emitSignOut() {
+  emitSignOut(): void {
     this.signOut.emit();
   }
   toggleMenu(): void {

@@ -11,15 +11,15 @@
                     <td>Following</td>
                 </tr>
                 <tr>
-                    <td>{{ currentUser.followerCount }}</td>
-                    <td>{{ currentUser.followingCount }}</td>
+                    <!-- <td>{{ currentUser.followerCount }}</td>
+                    <td>{{ currentUser.followingCount }}</td> -->
                 </tr>
             </table>
         </div>
     </div>
     <div class="userInfoBottom">
         <h3>Join Date</h3>
-        <span>{{ currentUser.userJoinDate | date: 'dd/MM/YYYY' }}</span>
+        <span>{{ currentUser.accountCreationDate | date: 'dd/MM/YYYY' }}</span>
     </div>
 </div>
 

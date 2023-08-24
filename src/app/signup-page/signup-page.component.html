@@ -1,0 +1,68 @@
+<div class="box">
+
+    <!-- Error message list -->
+    <div *ngFor="let message of errorMessages">
+        <p class="error-message">{{message}}</p>
+    </div>
+
+    <!-- First part of form -->
+
+    <h2>Sign Up</h2>
+    <form (ngSubmit)="onSignUp()">
+
+        <div *ngIf="!shouldMoveToNextForm">
+            <div class="input-container">
+                <input id="username-input" type="text" [(ngModel)]="username" name="username" (blur)="checkUsername()" placeholder="@username"
+                    autocomplete="username" required>
+                <!-- <label for="username-input">Username</label> -->
+            </div>
+            <div class="input-container">
+                <input id="display-name-input" type="text" [(ngModel)]="displayName" name="displayName"
+                    placeholder="display name" required />
+                <!-- <label for="display-name-input">Display Name</label> -->
+            </div>
+
+            <div class="input-container">
+                <input id="picture-path-input" type="text" [(ngModel)]="profilePicturePath" name="profilePicturePath"
+                    placeholder="picture path" required />
+                <!-- <label for="picture-path-input">Profile picture</label> -->
+            </div>
+            <div class="input-container default-image">
+                images:
+                <input type="radio" value="../../assets/guest.png" name="profile-image" (change)="onRadioChange($event)"
+                    checked>
+                <input type="radio" value="../../assets/guest2.png" name="profile-image"
+                    (change)="onRadioChange($event)">
+                <input type="radio" value="../../assets/guest3.png" name="profile-image"
+                    (change)="onRadioChange($event)">
+                <img src="{{profilePicturePath}}" *ngIf="profilePicturePath" width="50" height="50">
+            </div>
+            <button class="card card-small" (click)="shouldMoveToNextForm = true">Next</button>
+        </div>
+        <!-- Next part of form -->
+        <div *ngIf="shouldMoveToNextForm">
+            <button class="card card-small backarrow" (click)="shouldMoveToNextForm = false"><--</button>
+                    <div class="input-container">
+                        <input id="password-input" type="password" [(ngModel)]="password" name="password"
+                           (blur)="checkPassword()" placeholder="password" autocomplete="new-password" />
+                        <!-- <label for="password-input">Password</label> -->
+                    </div>
+
+                    <div class="input-container">
+                        <input id="password-verify-input" type="password" [(ngModel)]="passwordVerify"
+                            name="passwordVerify" (blur)="checkPassword()" placeholder="verify password" autocomplete="new-password" />
+                        <!-- <label for="password-input">Password</label> -->
+                    </div>
+
+                    <div class="input-container">
+                        <input id="private-checkbox" type="checkbox" [(ngModel)]="isPrivate" name="isPrivate"
+                            required />
+                        <label for="private-checkbox">Private Account</label>
+                    </div>
+
+                    <!-- Add more form fields as needed -->
+                    <button class="card card-small" type="submit">Sign Up</button>
+
+        </div>
+    </form>
+</div>

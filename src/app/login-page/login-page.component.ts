@@ -1,4 +1,7 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { UserDataService } from '../services/user-data.service';
+import { UserCred } from '../Model/userCred';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-login-page',
@@ -6,9 +9,10 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent {
-  @Output() signIn = new EventEmitter<{username: string, password: string}>();
 
-  emitSignIn(credentialUsername: string, credentialPassword: string) {
-    this.signIn.emit({username: credentialUsername, password: credentialPassword});
+  constructor(private loginService: LoginService) {
+  }
+  SignIn(usercred: UserCred) {
+    this.loginService.signIn(usercred);
   }
 }

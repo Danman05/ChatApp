@@ -9,10 +9,15 @@
             <label for="user-input-password">Password:</label>
         </div>
         <div class="card-container">
-            <button type="button" (click)="emitSignIn(userCredentialUsername.value, userCredentialPassword.value)"
+            <button type="button" (click)="SignIn({username: userCredentialUsername.value, password: userCredentialPassword.value})" routerLink="/app-profile-page"
                 class="card card-small" tabindex="0">
                 <span>Sign in</span>
             </button>
+        </div>
+        <div class="signUp">
+            <p>Don't have an account? 
+                <a routerLink="/app-signup-page">Sign up here!</a> 
+            </p>
         </div>
     </div>
 </form>

@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../Model/userModel';
-
+import { UserDB } from '../Model/userDbModel';
+import { UserDataService } from '../services/user-data.service';
 
 @Component({
   selector: 'app-home-page',
@@ -8,9 +9,15 @@ import { User } from '../Model/userModel';
   styleUrls: ['./home-page.component.scss']
 })
 
-export class HomePageComponent {
+export class HomePageComponent implements OnInit{
 
-  @Input() userList!: User[];
+  userList!: UserDB[];
   
+  constructor(private userService: UserDataService) {
+
+  }
+  ngOnInit(): void {
+    this.userList = this.userService.userList;
+  }
 }
 

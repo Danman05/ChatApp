@@ -1,5 +1,8 @@
 @import '../../variables.scss';
 
+h2 {
+    color: $webSecondaryColor;
+}
 
 .box {
     position: relative;
@@ -13,10 +16,17 @@
     padding: 30px 60px;
     background-color: $webPrimaryColor;
 }
+
+.default-image {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .input-container {
     position: relative;
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     color: $webSecondaryColor;
 }
 
@@ -27,6 +37,7 @@
     font-size: 16px;
     transition: all 0.5s ease-in-out;
 }
+
 .input-container input {
     border: 0;
     border-bottom: 1px solid #555;
@@ -36,6 +47,7 @@
     font-size: 16px;
     color: $webSecondaryColor;
 }
+
 .input-container input:focus {
     border: none;
     outline: none;
@@ -49,15 +61,28 @@
 
 }
 
-.signUp
-p, 
-a{
+.signUp p,
+a {
     margin-top: 20px;
     color: $webSecondaryColor;
 }
+
 a:hover {
     color: $webGrayHover;
 }
+
 .card {
     margin: 0;
+}
+
+.backarrow {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    position: fixed;
+    margin: -14%;
+}
+
+.error-message {
+ color: red;
 }

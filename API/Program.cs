@@ -19,6 +19,12 @@ public class Program
         {
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
         });
+
+        builder.Services.AddCors(options => options.AddPolicy(name:"YeeterOrigins",
+        policy => {
+            policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+        }
+        ));
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -28,6 +34,7 @@ public class Program
             app.UseSwaggerUI();
         }
 
+        app.UseCors("YeeterOrigins");
         app.UseHttpsRedirection();
 
         app.UseAuthorization();

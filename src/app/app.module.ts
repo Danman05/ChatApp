@@ -9,6 +9,9 @@ import { SearchComponent } from './home-page/search/search.component';
 import { MessageContentComponent } from './home-page/message-content/message-content.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { HttpClientModule } from '@angular/common/http';
+import { SignupPageComponent } from './signup-page/signup-page.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,10 +21,13 @@ import { LoginPageComponent } from './login-page/login-page.component';
     SearchComponent,
     MessageContentComponent,
     HeaderComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    SignupPageComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],

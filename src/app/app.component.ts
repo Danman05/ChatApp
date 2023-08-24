@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from './Model/userModel';
 import { LoginService } from './services/login.service';
 import { UserCred } from './Model/userCred';
-
+import { UserDataService } from './services/user-data.service';
+import { UserDB } from '../app/Model/userDbModel';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,30 +11,38 @@ import { UserCred } from './Model/userCred';
 })
 export class AppComponent implements OnInit {
   title = 'Y';
+  dataLoaded: boolean = false;
   isSignedIn: boolean = false;
-  navigateTo: string = "";
   userList: User[] = [];
-  currentUser!: User; 
-  constructor(private userService: LoginService) {
-  }
 
+  dbUserList: UserDB[] = [];
+  constructor(private userService: LoginService, private userDbService: UserDataService) {
+  }
+  
+  // can be used to simulate data retrivel
+  // setTimeout(() => {
+    // API Calls goes here
+  // }, 1500);
   ngOnInit(): void {
-    this.userList = this.userService.userList;
+    this.userDbService.GetData()
+      .subscribe({
+        next: (data => {
+          this.userDbService.userList = data;
+          this.dataLoaded = true;
+        }),
+        error: (response => {
+          console.log(response);
+        })
+      });
   }
 
-  signOut() : void {
-    this.isSignedIn = this.userService.signOut();
-    this.currentUser = this.userService.signedInUser;
-    this.navigateTo = "homePage";
-  }
-
-  signIn(credentials: UserCred) : void {
+  signIn(credentials: UserCred): void {
     this.isSignedIn = this.userService.signIn(credentials);
-    this.currentUser = this.userService.signedInUser;
   }
 
-  // 
-  setNavigation(navigateTo: string) : void {
-    this.navigateTo = navigateTo;
+  signOut(): void {
+    this.isSignedIn = this.userService.signOut();
   }
+
+
 }
