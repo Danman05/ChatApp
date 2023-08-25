@@ -24,6 +24,8 @@ public partial class YeeterDbContext : DbContext
     public virtual DbSet<NewUser> NewUsers { get; set; }
 
     public virtual DbSet<FollowerResult> FollowerResults { get; set; }
+
+    public DbSet<ProfileResult> ProfileResults { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<PostedContent>(entity =>
@@ -108,6 +110,10 @@ public partial class YeeterDbContext : DbContext
         modelBuilder.Entity<FollowerResult>(entity => {
             entity.HasNoKey();
             
+        });
+
+        modelBuilder.Entity<ProfileResult>(entity => {
+            entity.HasNoKey();
         });
 
         OnModelCreatingPartial(modelBuilder);

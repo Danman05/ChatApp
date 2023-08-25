@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { User } from '../Model/userModel';
-import { LoginService } from '../services/login.service';
-import { UserDB } from '../Model/userDbModel';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { UserDataService } from '../services/user-data.service';
+import { userProfile } from '../Model/userProfile';
 
 @Component({
   selector: 'app-profile-page',
@@ -9,15 +9,25 @@ import { UserDB } from '../Model/userDbModel';
   styleUrls: ['./profile-page.component.scss']
 })
 export class ProfilePageComponent implements OnInit{
-  currentUser!: UserDB; 
-
-  constructor(private loginService: LoginService) {
-    
-  }
+  currentUser!: userProfile; 
+  id?: number;
+  constructor(private userService: UserDataService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.currentUser = this.loginService.signedInUser;
-    console.log(this.currentUser);
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.id = +params.get('id')!;
+    });
+    this.userService.GetProfileData(this.id!)
+    .subscribe({
+      next: (result => {
+        this.currentUser = result[0];
+        console.log(this.currentUser);
+        this.currentUser.FollowerCount = result[0].FollowerCount;
+        console.log(this.currentUser.FollowerCount);
+      }),
+      error: (error => {
+        console.log(error);
+      }),
+    });
   }
-
 }

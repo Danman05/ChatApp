@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { UserDataService } from '../services/user-data.service';
 import { UserDB } from '../Model/userDbModel';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-signup-page',
   templateUrl: './signup-page.component.html',
@@ -12,14 +14,14 @@ export class SignupPageComponent {
   passwordVerify: string = '';
   displayName: string = '';
   profilePicturePath?: string;
-  isVerified: boolean = false;
   isPrivate: boolean = false;
 
   shouldMoveToNextForm: boolean = false;
   notValidForm: boolean = false;
-  errorMessages: string[] = [];
+  errorMessages: string[] = ["", ""];
 
-  constructor(private httpService: UserDataService, private userService: UserDataService) {
+  signedUpUser?: UserDB;
+  constructor(private userService: UserDataService, private router: Router) {
 
   }
   nextForm() {
@@ -35,7 +37,7 @@ export class SignupPageComponent {
       this.errorMessages[0] = "Username already exists";
       return;
     }
-    this.errorMessages[0] = ""; 
+    this.errorMessages[0] = "";
   }
   checkPassword(): void {
     console.log("checking password");
@@ -48,21 +50,19 @@ export class SignupPageComponent {
   onSignUp() {
     if (this.errorMessages[0].length > 0 || this.errorMessages[1].length > 0) {
       console.log(this.errorMessages[0], " | ", this.errorMessages[1]);
-      console.log("can't register user, fix errors");
       return;
     }
 
-    
+
     const userData: UserDB = {
       username: this.username,
       password: this.password,
       displayName: this.displayName,
       profilePicturePath: this.profilePicturePath,
       isPrivate: this.isPrivate,
-      isVerified: this.isVerified
     };
 
-    this.httpService.CreateUser(userData)
+    this.userService.CreateUser(userData)
       .subscribe({
         next: (data => {
           console.log('User registered successfully', data);
@@ -71,5 +71,18 @@ export class SignupPageComponent {
           console.error('Error registering user', error);
         }),
       });
+    
+      this.userService.GetData()
+      .subscribe({
+        next: (data => {
+          this.userService.userList = data;
+          this.signedUpUser = this.userService.userList.find(x => x.username = this.username);
+          this.router.navigate(['/app-profile-page', this.signedUpUser?.userId])
+        }),
+        error: (error => {
+          console.log("Error getting user list");
+        }),
+      });
+
   }
 }

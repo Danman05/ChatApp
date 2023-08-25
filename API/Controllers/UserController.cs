@@ -75,6 +75,13 @@ public class UserController : ControllerBase
 
         return Ok(await _dbContext.FollowerResults.FromSqlRaw(storedProcedure).ToListAsync());
     }
+    [HttpGet("ProfileData")]
+    public async Task<ActionResult<List<ProfileResult>>> ProfileProc(int id) 
+    {
+        string storedProcedure = $@"exec GetProfileData @userIDParam = {id}";
+        
+        return Ok(await _dbContext.ProfileResults.FromSqlRaw(storedProcedure).ToListAsync());
+    }
 
     [HttpPost("Follow")]
     public async Task<ActionResult<List<UserFollower>>> Follow(int currentUserID, int followedUserID)

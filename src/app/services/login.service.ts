@@ -19,6 +19,7 @@ export class LoginService {
   // ];
   
   constructor(private userService: UserDataService) { }
+  
   signIn(credentials: UserCred) {
     
     let user = this.userService.userList.find(x => x.username == credentials.username);

@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'app-signup-page', component: SignupPageComponent},
   { path: 'app-login-page', component: LoginPageComponent},
   { path: 'app-home-page', component: HomePageComponent},
-  { path: 'app-profile-page', component: ProfilePageComponent}
+  { path: 'app-profile-page/:id', component: ProfilePageComponent}
 ];
 
 @NgModule({
