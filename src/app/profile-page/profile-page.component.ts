@@ -21,9 +21,6 @@ export class ProfilePageComponent implements OnInit{
     .subscribe({
       next: (result => {
         this.currentUser = result[0];
-        console.log(this.currentUser);
-        this.currentUser.FollowerCount = result[0].FollowerCount;
-        console.log(this.currentUser.FollowerCount);
       }),
       error: (error => {
         console.log(error);

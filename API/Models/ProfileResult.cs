@@ -5,10 +5,10 @@ namespace API.Models;
 
 public partial class ProfileResult
 {
-    public int userID { get; set; }
-    public string? username { get; set; }
+    public int UserID { get; set; }
+    public string? Username { get; set; }
 
-    public string? displayName { get; set; }
+    public string? DisplayName { get; set; }
 
     public string? ProfilePicturePath { get; set; }
     public bool IsPrivate { get; set; }

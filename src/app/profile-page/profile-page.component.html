@@ -11,8 +11,8 @@
                     <td>Following</td>
                 </tr>
                 <tr>
-                    <td>{{ currentUser.FollowerCount }}</td>
-                    <td>{{ currentUser.FollowingCount }}</td>
+                    <td>{{ currentUser.followerCount }}</td>
+                    <td>{{ currentUser.followingCount }}</td>
                 </tr>
             </table>
         </div>
@@ -21,6 +21,10 @@
         <h3>Join Date</h3>
         <span>{{ currentUser.accountCreationDate | date: 'dd/MM/YYYY' }}</span>
     </div>
+</div>
+
+<div *ngIf="!currentUser">
+    Profile not found
 </div>
 
 

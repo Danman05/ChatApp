@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserDataService } from '../services/user-data.service';
 import { UserDB } from '../Model/userDbModel';
 import { Router } from '@angular/router';
+import { compileNgModule } from '@angular/compiler';
 
 @Component({
   selector: 'app-signup-page',
@@ -66,23 +67,18 @@ export class SignupPageComponent {
       .subscribe({
         next: (data => {
           console.log('User registered successfully', data);
+          this.userService.GetData()
+            .subscribe({
+              next: (data => {
+                this.userService.userList = data;
+                this.signedUpUser = this.userService.userList.find(x => x.username == this.username);
+                this.router.navigate(['/app-profile-page', this.signedUpUser?.userId]);
+              }),
+            });
         }),
         error: (error => {
           console.error('Error registering user', error);
         }),
       });
-    
-      this.userService.GetData()
-      .subscribe({
-        next: (data => {
-          this.userService.userList = data;
-          this.signedUpUser = this.userService.userList.find(x => x.username = this.username);
-          this.router.navigate(['/app-profile-page', this.signedUpUser?.userId])
-        }),
-        error: (error => {
-          console.log("Error getting user list");
-        }),
-      });
-
   }
 }

@@ -6,7 +6,7 @@ export class userProfile {
     isPrivate?: boolean;
     isVerified?: boolean;
     accountCreationDate?: Date;
-    FollowingCount?: number;
-    FollowerCount?: number;
+    followingCount?: number;
+    followerCount?: number;
 
 }
