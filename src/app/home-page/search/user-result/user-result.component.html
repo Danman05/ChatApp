@@ -1,0 +1,11 @@
+<ul class="user-list">
+    <li *ngFor="let user of filteredUsers">
+        <a [routerLink]="['/app-profile-page', user.userId]">
+            <img [src]="user.profilePicturePath" alt="{{ user.displayName }} Profile Picture">
+            <div class="user-info">
+                <h3>{{ user.displayName }}</h3>
+                <p>@{{ user.username }}</p>
+            </div>
+        </a>
+    </li>
+</ul>

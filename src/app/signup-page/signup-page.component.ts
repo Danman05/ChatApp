@@ -10,6 +10,7 @@ import { compileNgModule } from '@angular/compiler';
   styleUrls: ['./signup-page.component.scss']
 })
 export class SignupPageComponent {
+  
   username: string = '';
   password: string = '';
   passwordVerify: string = '';
@@ -22,9 +23,8 @@ export class SignupPageComponent {
   errorMessages: string[] = ["", ""];
 
   signedUpUser?: UserDB;
-  constructor(private userService: UserDataService, private router: Router) {
+  constructor(private userService: UserDataService, private router: Router) { }
 
-  }
   nextForm() {
     this.shouldMoveToNextForm = true;
   }
@@ -34,22 +34,29 @@ export class SignupPageComponent {
 
   checkUsername(): void {
     console.log("checking username");
-    if (this.userService.userList.find(x => x.username == this.username)) {
+    if (this.userService.userList.find(x => x.username == this.username))
       this.errorMessages[0] = "Username already exists";
-      return;
-    }
-    this.errorMessages[0] = "";
+    else
+      this.errorMessages[0] = "";
   }
   checkPassword(): void {
-    console.log("checking password");
-    if (this.password != this.passwordVerify) {
-      this.errorMessages[1] = "Passwords does not match";
-      return;
-    }
-    this.errorMessages[1] = "";
+
+    if (this.password.length < 7)
+      this.errorMessages[1] = "Password is not long enough";
+    else
+      this.errorMessages[1] = "";
+
+    if (this.password != this.passwordVerify)
+      this.errorMessages[2] = "Passwords does not match";
+    else
+      this.errorMessages[2] = "";
   }
   onSignUp() {
-    if (this.errorMessages[0].length > 0 || this.errorMessages[1].length > 0) {
+
+    this.checkUsername();
+    this.checkPassword();
+
+    if (this.errorMessages[0].length > 0 || this.errorMessages[1].length > 0 || this.errorMessages[2].length > 0) {
       console.log(this.errorMessages[0], " | ", this.errorMessages[1]);
       return;
     }

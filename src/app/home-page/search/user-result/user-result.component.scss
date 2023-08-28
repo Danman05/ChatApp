@@ -1,0 +1,53 @@
+@import '../../../../variables.scss';
+
+.user-list {
+    list-style: none;
+    padding: 0;
+
+    li {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid $webGrayHover;
+
+        a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            /* Remove default underline */
+            color: $webPrimaryColor;
+            /* Change link color */
+            transition: color 0.1s ease-in-out;
+            /* Add smooth color transition */
+
+            &:hover {
+                color: $webLinkHover;
+                /* Change link color on hover */
+            }
+
+            img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                margin-right: 15px;
+            }
+
+            .user-info {
+                h3 {
+                    margin: 0;
+                    font-size: 18px;
+                }
+
+                p {
+                    margin: 0;
+                    font-size: 14px;
+                    color: $webPrimaryColor;
+                }
+            }
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+    }
+}

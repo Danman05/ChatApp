@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { User } from '../Model/userModel';
 import { UserDB } from '../Model/userDbModel';
 import { UserDataService } from '../services/user-data.service';
 

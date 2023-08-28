@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from './Model/userModel';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { LoginService } from './services/login.service';
 import { UserCred } from './Model/userCred';
 import { UserDataService } from './services/user-data.service';
-import { UserDB } from '../app/Model/userDbModel';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,10 +12,8 @@ export class AppComponent implements OnInit {
   title = 'Y';
   dataLoaded: boolean = false;
   isSignedIn: boolean = false;
-  userList: User[] = [];
 
-  dbUserList: UserDB[] = [];
-  constructor(private userService: LoginService, private userDbService: UserDataService) {
+  constructor(private loginService: LoginService, private userService: UserDataService) {
   }
   
   // can be used to simulate data retrivel
@@ -24,11 +21,12 @@ export class AppComponent implements OnInit {
     // API Calls goes here
   // }, 1500);
   ngOnInit(): void {
-    this.userDbService.GetData()
+    this.userService.GetData()
       .subscribe({
         next: (data => {
-          this.userDbService.userList = data;
+          this.userService.userList = data;
           this.dataLoaded = true;
+          console.log(this.userService.userList);
         }),
         error: (response => {
           console.log(response);
@@ -37,12 +35,10 @@ export class AppComponent implements OnInit {
   }
 
   signIn(credentials: UserCred): void {
-    this.isSignedIn = this.userService.signIn(credentials);
+    this.isSignedIn = this.loginService.signIn(credentials);
   }
 
   signOut(): void {
-    this.isSignedIn = this.userService.signOut();
+    this.isSignedIn = this.loginService.signOut();
   }
-
-
 }

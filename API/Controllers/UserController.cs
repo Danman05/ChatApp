@@ -17,9 +17,9 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("GetAll")]
-    public async Task<ActionResult<List<User>>> GetAll()
+    public async Task<ActionResult<List<ProfileResult>>> GetAll()
     {
-        return Ok(await _dbContext.Users.ToListAsync());
+        return Ok(await _dbContext.ProfileResults.FromSqlInterpolated($@"exec GetAllSafeInfo").ToListAsync());
     }
 
     [HttpGet("GetOne")]
@@ -71,18 +71,18 @@ public class UserController : ControllerBase
     [HttpGet("GetProcData")]
     public async Task<ActionResult<List<FollowerResult>>> GetProc(int id)
     {
-        string storedProcedure = $@"exec GetProfileInfo @userIDParam = {id}";
-
-        return Ok(await _dbContext.FollowerResults.FromSqlRaw(storedProcedure).ToListAsync());
+        return Ok(await _dbContext.FollowerResults.FromSqlInterpolated($@"exec GetProfileInfo @userIDParam = {id}").ToListAsync());
     }
     [HttpGet("ProfileData")]
     public async Task<ActionResult<List<ProfileResult>>> ProfileProc(int id) 
-    {
-        string storedProcedure = $@"exec GetProfileData @userIDParam = {id}";
-        
-        return Ok(await _dbContext.ProfileResults.FromSqlRaw(storedProcedure).ToListAsync());
+    {        
+        return Ok(await _dbContext.ProfileResults.FromSqlInterpolated($@"exec GetProfileData @userIDParam = {id}").ToListAsync());
     }
-
+    [HttpGet("Login")]
+    public async Task<ActionResult<List<ProfileResult>>> LogInUser(string username, string password)
+    {
+        return Ok(await _dbContext.ProfileResults.FromSqlInterpolated($@"exec LogInUser @username = {username}, @password = {password}").ToListAsync());
+    }
     [HttpPost("Follow")]
     public async Task<ActionResult<List<UserFollower>>> Follow(int currentUserID, int followedUserID)
     {

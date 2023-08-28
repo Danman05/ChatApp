@@ -1,7 +1,8 @@
 <div class="wrap">
    <div class="search">
-      <input type="text" class="searchTerm" placeholder="@User">
+      <input type="text" class="searchTerm" (input)="searchUser($event)" placeholder="@User">
       <button type="submit" class="searchButton">
      </button>
    </div>
+   <app-user-result [searchTerm]="searchValue" *ngIf="showUsers"></app-user-result>
 </div>

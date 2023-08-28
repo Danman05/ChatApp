@@ -2,18 +2,4 @@
     <app-search></app-search>
 </div>
 <div class="homeContent">
-
-    <h2>Welcome!</h2>
-
-    <p>list of users</p>
-    <div *ngFor="let user of userList">
-    <a [routerLink]="['/app-profile-page', user.userId]">
-        view profile
-    </a>
-        <h1> {{ user.displayName }}
-            <span>({{ user.username }})</span>
-        </h1>
-        <h3> {{ user.accountCreationDate | date: "dd/MM/YYYY HH:mm" }}</h3>
-
-    </div>
 </div>

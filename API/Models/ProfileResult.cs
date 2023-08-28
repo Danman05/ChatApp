@@ -5,7 +5,7 @@ namespace API.Models;
 
 public partial class ProfileResult
 {
-    public int UserID { get; set; }
+    public int UserId { get; set; }
     public string? Username { get; set; }
 
     public string? DisplayName { get; set; }

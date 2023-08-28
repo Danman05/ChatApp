@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { UserDataService } from '../services/user-data.service';
 import { userProfile } from '../Model/userProfile';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -10,8 +11,10 @@ import { userProfile } from '../Model/userProfile';
 })
 export class ProfilePageComponent implements OnInit{
   currentUser!: userProfile; 
+  ownsAccount: boolean = false;
+  isSignedIn: boolean = false;
   id?: number;
-  constructor(private userService: UserDataService, private route: ActivatedRoute) { }
+  constructor(private userService: UserDataService, private loginService: LoginService ,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -21,6 +24,10 @@ export class ProfilePageComponent implements OnInit{
     .subscribe({
       next: (result => {
         this.currentUser = result[0];
+        this.isSignedIn = this.loginService.isSignedIn;
+        if (this.loginService.signedInUser.userId == this.currentUser.userId) {
+          this.ownsAccount = true;
+        }
       }),
       error: (error => {
         console.log(error);

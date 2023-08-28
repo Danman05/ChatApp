@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs'
 import { HttpClient } from '@angular/common/http'
-import { User } from '../Model/userModel';
 import { UserDB } from '../Model/userDbModel';
 import { userProfile } from '../Model/userProfile';
 
@@ -18,6 +17,7 @@ export class UserDataService {
 
 
   GetData() : Observable<UserDB[]> {
+    
     return this.httpClient.get<UserDB[]>(`${this.endpoint}GetAll`);
   }
 

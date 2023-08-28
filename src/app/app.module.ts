@@ -12,6 +12,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SignupPageComponent } from './signup-page/signup-page.component';
 import { FormsModule } from '@angular/forms';
+import { UserResultComponent } from './home-page/search/user-result/user-result.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     LoginPageComponent,
     SignupPageComponent,
+    UserResultComponent,
   ],
   imports: [
     BrowserModule,

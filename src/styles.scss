@@ -4,6 +4,7 @@ html,
 body {
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 .card {
@@ -19,7 +20,7 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.1s ease-in-out;
     line-height: 12px;
     cursor: pointer;
 }

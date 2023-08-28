@@ -4,6 +4,10 @@
         <img src="{{ currentUser.profilePicturePath }}"> 
         <h1>{{ currentUser.displayName}}</h1>
         <h2>@{{ currentUser.username }}</h2>
+        <!-- More functionality -->
+        <div *ngIf="isSignedIn"></div>
+        <button class="card card-small" *ngIf="ownsAccount">Edit Profile</button>
+            <button class="card card-small" *ngIf="isSignedIn && !ownsAccount">Follow</button>
         <div class="followCounts">
             <table>
                 <tr>
