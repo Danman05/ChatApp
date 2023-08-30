@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UserDB } from '../Model/userDbModel';
 import { UserDataService } from '../services/user-data.service';
+import { userProfile } from '../Model/userProfile';
 
 @Component({
   selector: 'app-home-page',
@@ -10,7 +10,7 @@ import { UserDataService } from '../services/user-data.service';
 
 export class HomePageComponent implements OnInit{
 
-  userList!: UserDB[];
+  userList!: userProfile[];
   
   constructor(private userService: UserDataService) {
 

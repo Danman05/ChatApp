@@ -83,6 +83,20 @@ public class UserController : ControllerBase
     {
         return Ok(await _dbContext.ProfileResults.FromSqlInterpolated($@"exec LogInUser @username = {username}, @password = {password}").ToListAsync());
     }
+    [HttpPost("EditProfile")]
+    public async Task<ActionResult<List<ProfileResult>>> EditProfile(ProfileResult profile)
+    {
+        ProfileResult uprofile = await _dbContext.ProfileResults.FindAsync(profile.UserId);
+        if (uprofile == null)
+            return BadRequest("Hero not found");
+
+        uprofile.DisplayName = profile.DisplayName;
+        uprofile.ProfilePicturePath = profile.ProfilePicturePath;
+        uprofile.IsPrivate = profile.IsPrivate;
+
+        await _dbContext.SaveChangesAsync();
+        return Ok(await _dbContext.ProfileResults.ToListAsync());
+    }
     [HttpPost("Follow")]
     public async Task<ActionResult<List<UserFollower>>> Follow(int currentUserID, int followedUserID)
     {
@@ -110,5 +124,4 @@ public class UserController : ControllerBase
 
         return Ok($"User: {currentUserID} Followed {followedUserID} succesfully");
     }
-
 }

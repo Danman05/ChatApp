@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { UserDataService } from '../services/user-data.service';
 import { UserDB } from '../Model/userDbModel';
 import { Router } from '@angular/router';
-import { compileNgModule } from '@angular/compiler';
+import { userProfile } from '../Model/userProfile';
 
 @Component({
   selector: 'app-signup-page',
@@ -22,7 +22,7 @@ export class SignupPageComponent {
   notValidForm: boolean = false;
   errorMessages: string[] = ["", ""];
 
-  signedUpUser?: UserDB;
+  signedUpUser?: userProfile;
   constructor(private userService: UserDataService, private router: Router) { }
 
   nextForm() {
@@ -33,31 +33,34 @@ export class SignupPageComponent {
   }
 
   checkUsername(): void {
-    console.log("checking username");
     if (this.userService.userList.find(x => x.username == this.username))
       this.errorMessages[0] = "Username already exists";
     else
       this.errorMessages[0] = "";
+
+    if(this.username.length < 1)
+      this.errorMessages[1] = "Username not long enough";
+    else
+      this.errorMessages[1] = "";
   }
   checkPassword(): void {
 
     if (this.password.length < 7)
-      this.errorMessages[1] = "Password is not long enough";
-    else
-      this.errorMessages[1] = "";
-
-    if (this.password != this.passwordVerify)
-      this.errorMessages[2] = "Passwords does not match";
+      this.errorMessages[2] = "Password is not long enough";
     else
       this.errorMessages[2] = "";
+
+    if (this.password != this.passwordVerify)
+      this.errorMessages[3] = "Passwords does not match";
+    else
+      this.errorMessages[3] = "";
   }
   onSignUp() {
 
     this.checkUsername();
     this.checkPassword();
 
-    if (this.errorMessages[0].length > 0 || this.errorMessages[1].length > 0 || this.errorMessages[2].length > 0) {
-      console.log(this.errorMessages[0], " | ", this.errorMessages[1]);
+    if (this.errorMessages[0].length > 0 || this.errorMessages[1].length > 0 || this.errorMessages[2].length > 0 || this.errorMessages[3].length > 0) {
       return;
     }
 
@@ -73,7 +76,6 @@ export class SignupPageComponent {
     this.userService.CreateUser(userData)
       .subscribe({
         next: (data => {
-          console.log('User registered successfully', data);
           this.userService.GetData()
             .subscribe({
               next: (data => {

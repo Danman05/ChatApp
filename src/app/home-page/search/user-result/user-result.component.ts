@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { UserDB } from 'src/app/Model/userDbModel';
+import { userProfile } from 'src/app/Model/userProfile';
 import { UserDataService } from 'src/app/services/user-data.service';
 
 @Component({
@@ -9,12 +10,12 @@ import { UserDataService } from 'src/app/services/user-data.service';
 })
 export class UserResultComponent implements OnChanges {
   @Input() searchTerm: string = "";
-  filteredUsers?: UserDB[]; 
+  filteredUsers?: userProfile[]; 
 
   constructor(private userService: UserDataService) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.filteredUsers = this.userService.userList.filter(x => x.username.includes(this.searchTerm));
+    this.filteredUsers = this.userService.userList.filter(x => x.username?.includes(this.searchTerm));
   }
 }

@@ -9,29 +9,36 @@ import { LoginService } from '../services/login.service';
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.scss']
 })
-export class ProfilePageComponent implements OnInit{
-  currentUser!: userProfile; 
+export class ProfilePageComponent implements OnInit {
+  currentUser!: userProfile;
   ownsAccount: boolean = false;
   isSignedIn: boolean = false;
   id?: number;
-  constructor(private userService: UserDataService, private loginService: LoginService ,private route: ActivatedRoute) { }
+  constructor(private userService: UserDataService, private loginService: LoginService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = +params.get('id')!;
     });
     this.userService.GetProfileData(this.id!)
-    .subscribe({
-      next: (result => {
-        this.currentUser = result[0];
-        this.isSignedIn = this.loginService.isSignedIn;
-        if (this.loginService.signedInUser.userId == this.currentUser.userId) {
-          this.ownsAccount = true;
-        }
-      }),
-      error: (error => {
-        console.log(error);
-      }),
-    });
+      .subscribe({
+        next: (result => {
+
+          try {
+            this.currentUser = result[0];
+            this.isSignedIn = this.loginService.isSignedIn;
+
+            if (this.loginService.signedInUser && this.loginService.signedInUser.userId == this.currentUser.userId)
+              this.ownsAccount = true;
+
+          } catch (error) {
+            console.log(error);
+          }
+
+        }),
+        error: (error => {
+          console.log(error);
+        }),
+      });
   }
 }

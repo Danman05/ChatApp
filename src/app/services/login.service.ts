@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { UserCred } from '../Model/userCred';
 import { UserDataService } from './user-data.service';
-import { UserDB } from '../Model/userDbModel';
+import { userProfile } from '../Model/userProfile';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,28 +10,33 @@ import { UserDB } from '../Model/userDbModel';
 export class LoginService {
 
 
-  signedInUser!: UserDB;
+  signedInUser!: userProfile;
   isSignedIn:boolean = false;
   
   constructor(private userService: UserDataService) { }
   
-  signIn(credentials: UserCred) {
-    
-    let user = this.userService.userList.find(x => x.username == credentials.username);
-    console.log(user);
-    if (!user || user.password !== credentials.password) {
+  async signIn(credentials: UserCred): Promise<boolean> {
+    this.isSignedIn = false;
+
+    try {
+      const data = await this.userService.LogIn(credentials).toPromise();
+
+      if (data && data.length > 0) {
+        this.signedInUser = data[0];
+        this.isSignedIn = true;
+        return true;
+      }
+      return false;
+    } catch (error) {
+      // console.log(error);
       console.log("Login failed");
       return false;
     }
-    this.signedInUser = user;
-    this.isSignedIn = true;
-    return true;
   }
 
   signOut() {
     this.signedInUser = null!;
     this.isSignedIn = false;
-    return false;
   }
 
   getSign() {

@@ -11,7 +11,7 @@ import { UserDataService } from './services/user-data.service';
 export class AppComponent implements OnInit {
   title = 'Y';
   dataLoaded: boolean = false;
-  isSignedIn: boolean = false;
+
 
   constructor(private loginService: LoginService, private userService: UserDataService) {
   }
@@ -26,7 +26,6 @@ export class AppComponent implements OnInit {
         next: (data => {
           this.userService.userList = data;
           this.dataLoaded = true;
-          console.log(this.userService.userList);
         }),
         error: (response => {
           console.log(response);
@@ -34,11 +33,7 @@ export class AppComponent implements OnInit {
       });
   }
 
-  signIn(credentials: UserCred): void {
-    this.isSignedIn = this.loginService.signIn(credentials);
-  }
-
   signOut(): void {
-    this.isSignedIn = this.loginService.signOut();
+    this.loginService.signOut();
   }
 }
