@@ -112,6 +112,10 @@ public partial class YeeterDbContext : DbContext
             
         });
 
+        modelBuilder.Entity<FollowId>(entity => {
+            entity.HasNoKey();
+        });
+
         modelBuilder.Entity<ProfileResult>(entity => {
             entity.HasNoKey();
         });

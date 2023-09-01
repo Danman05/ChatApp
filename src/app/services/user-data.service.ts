@@ -30,7 +30,4 @@ export class UserDataService {
   CreateUser(user: userProfile) : Observable<userProfile[]> {
     return this.httpClient.post<userProfile[]>(`${this.endpoint}Register`, user );
   }
-  LogIn(cred: UserCred): Observable<userProfile[]> {
-    return this.httpClient.get<userProfile[]>(`${this.endpoint}Login?username=${cred.username}&password=${cred.password}`)
-  }
 }

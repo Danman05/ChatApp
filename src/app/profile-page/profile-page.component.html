@@ -5,9 +5,11 @@
         <h1>{{ currentUser.displayName}}</h1>
         <h2>@{{ currentUser.username }}</h2>
         <!-- More functionality -->
-        <div *ngIf="isSignedIn"></div>
-        <button class="card card-small" *ngIf="ownsAccount">Edit Profile</button>
-            <button class="card card-small" *ngIf="isSignedIn && !ownsAccount">Follow</button>
+        <div *ngIf="isSignedIn">
+            <button class="card card-small" *ngIf="ownsAccount">Edit Profile</button>
+            <button class="card card-small" *ngIf="!ownsAccount && !isFollowingUser" (click)="followUser()">Follow</button>
+            <button class="card card-small" *ngIf="!ownsAccount && isFollowingUser" (click)="followUser()">Unfollow</button>
+        </div>
         <div class="followCounts">
             <table>
                 <tr>

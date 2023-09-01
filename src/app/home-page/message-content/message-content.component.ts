@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-message-content',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class MessageContentComponent {
 
+  isSignedIn$ = this.authService.isLoggedIn$;
+  showPostForm = false; // Initially hidden
+
+
+  constructor(private authService: AuthService) {
+  }
+  
+  togglePostForm() {
+    this.showPostForm = !this.showPostForm;
+  }
+  
 }

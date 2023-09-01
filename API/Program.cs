@@ -19,7 +19,7 @@ public class Program
         {
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
         });
-
+        builder.Services.AddScoped<FollowService>();
         builder.Services.AddCors(options => options.AddPolicy(name:"YeeterOrigins",
         policy => {
             policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();

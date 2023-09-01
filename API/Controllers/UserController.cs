@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -78,17 +79,14 @@ public class UserController : ControllerBase
     {        
         return Ok(await _dbContext.ProfileResults.FromSqlInterpolated($@"exec GetProfileData @userIDParam = {id}").ToListAsync());
     }
-    [HttpGet("Login")]
-    public async Task<ActionResult<List<ProfileResult>>> LogInUser(string username, string password)
+
+    [HttpPut("EditProfile")]
+    public async Task<ActionResult<List<User>>> EditProfile(ProfileResult profile)
     {
-        return Ok(await _dbContext.ProfileResults.FromSqlInterpolated($@"exec LogInUser @username = {username}, @password = {password}").ToListAsync());
-    }
-    [HttpPost("EditProfile")]
-    public async Task<ActionResult<List<ProfileResult>>> EditProfile(ProfileResult profile)
-    {
-        ProfileResult uprofile = await _dbContext.ProfileResults.FindAsync(profile.UserId);
+        User uprofile = await _dbContext.Users.FindAsync(profile.UserId);
+
         if (uprofile == null)
-            return BadRequest("Hero not found");
+            return BadRequest("Hero not founds");
 
         uprofile.DisplayName = profile.DisplayName;
         uprofile.ProfilePicturePath = profile.ProfilePicturePath;
@@ -97,31 +95,5 @@ public class UserController : ControllerBase
         await _dbContext.SaveChangesAsync();
         return Ok(await _dbContext.ProfileResults.ToListAsync());
     }
-    [HttpPost("Follow")]
-    public async Task<ActionResult<List<UserFollower>>> Follow(int currentUserID, int followedUserID)
-    {
-        // Get the User entities by their IDs
-        User? thisUser = await _dbContext.Users.FindAsync(currentUserID);
-        User? followsUser = await _dbContext.Users.FindAsync(followedUserID);
 
-        if (thisUser == null || followsUser == null)
-        {
-            // Handle error when users are not found
-            return NotFound();
-        }
-
-        UserFollower follower = new UserFollower()
-        {
-            ThisUserId = currentUserID,
-            FollowsUserId = followedUserID,
-            ThisUser = thisUser,
-            FollowsUser = followsUser
-        };
-
-        _dbContext.UserFollowers.Add(follower);
-
-        await _dbContext.SaveChangesAsync();
-
-        return Ok($"User: {currentUserID} Followed {followedUserID} succesfully");
-    }
 }

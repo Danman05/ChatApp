@@ -1,0 +1,63 @@
+@import '../../../../variables.scss';
+
+h2 {
+    color: $webSecondaryColor;
+}
+
+.box {
+    position: relative;
+    left: 50%;
+    margin-top: 215px;
+    max-width: 600px;
+    min-width: 175px;
+    transform: translate(-50%, -50%);
+    border: 1px solid $webPrimaryColor;
+    border-radius: 10px;
+    padding: 30px 60px;
+    background-color: $webPrimaryColor;
+}
+
+.default-image {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.input-container {
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: $webSecondaryColor;
+}
+.textContent{
+    resize: none;
+    height: 200px;
+}
+.textTitle {
+    resize: none;
+}
+.input-container input, textarea {
+    width: 350px;
+    border: 0;
+    border-bottom: 1px solid #555;
+    background: transparent;
+    // width: 100%;
+    padding: 8px 0 5px 0;
+    font-size: 16px;
+    color: $webSecondaryColor;
+}
+
+.input-container input:focus, textarea:focus {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid $webSecondaryColor;
+}
+
+.card {
+    margin: 0;
+    display: inline;
+}
+
+.error-message {
+    color: red;
+}

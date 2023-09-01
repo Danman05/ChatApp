@@ -20,7 +20,7 @@ export class SignupPageComponent {
 
   shouldMoveToNextForm: boolean = false;
   notValidForm: boolean = false;
-  errorMessages: string[] = ["", ""];
+  errorMessages: string[] = [];
 
   signedUpUser?: userProfile;
   constructor(private userService: UserDataService, private router: Router) { }

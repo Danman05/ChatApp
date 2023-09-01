@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { UserCred } from '../Model/userCred';
 import { UserDataService } from './user-data.service';
 import { userProfile } from '../Model/userProfile';
+import { AuthService } from './auth.service';
 
 
 @Injectable({
@@ -13,13 +14,13 @@ export class LoginService {
   signedInUser!: userProfile;
   isSignedIn:boolean = false;
   
-  constructor(private userService: UserDataService) { }
+  constructor(private authService: AuthService) { }
   
   async signIn(credentials: UserCred): Promise<boolean> {
     this.isSignedIn = false;
 
     try {
-      const data = await this.userService.LogIn(credentials).toPromise();
+      const data = await this.authService.LogIn(credentials).toPromise();
 
       if (data && data.length > 0) {
         this.signedInUser = data[0];
