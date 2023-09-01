@@ -9,21 +9,26 @@
 
     <h2>Create Post</h2>
     <form (ngSubmit)="onCreatePost()">
+        <div>
 
-        <div class="input-container">
-            <textarea class="textTitle" id="post-title-input" type="text" [(ngModel)]="postTitle" name="Title" (input)="checkTitle()"
-                placeholder="Title" required>
-             </textarea>
-            <!-- <label for="post-title-input">Title Name</label> -->
-        </div>
-        <div class="input-container">
-            <!-- <input id="post-content-input" type="text" [(ngModel)]="postContent" name="Content" placeholder="Content"
+            <div class="input-container">
+                <textarea class="textTitle" id="post-title-input" type="text" [(ngModel)]="postTitle" name="Title"
+                    (input)="checkTitle()" placeholder="Title" required>
+            </textarea>
+
+                <!-- <label for="post-title-input">Title Name</label> -->
+            </div>
+            <span class="input-count">{{postTitle.length}} / {{maxTitleLength}}</span>
+            <div class="input-container">
+                <!-- <input id="post-content-input" type="text" [(ngModel)]="postContent" name="Content" placeholder="Content"
                 required /> -->
-            <textarea class="textContent" id="post-content-input" type="text" [(ngModel)]="postContent" name="Content" placeholder="Content"
-                (input)="checkContent()" required="">
+                <textarea class="textContent" id="post-content-input" type="text" [(ngModel)]="postContent"
+                    name="Content" placeholder="Content" (input)="checkContent()" required="">
+            </textarea>
 
-                </textarea>
-            <!-- <label for="post-content-input">Content</label> -->
+                <!-- <label for="post-content-input">Content</label> -->
+            </div>
+            <span class="input-count">{{postContent.length}} / {{maxContentLength}}</span>
         </div>
 
         <!-- Add more form fields as needed -->
