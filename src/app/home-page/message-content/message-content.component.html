@@ -3,4 +3,5 @@
 <button class="card card-small" *ngIf="(isSignedIn$ | async) === true" (click)="togglePostForm()">
     {{ showPostForm ? 'Cancel' : 'Create Post' }}
 </button>
-<app-post-form *ngIf="showPostForm"></app-post-form>
+<app-post-form (refreshPostList)="refreshPostList()" *ngIf="showPostForm"></app-post-form>
+

@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { UserPost } from 'src/app/Model/userPost';
+import { LoginService } from 'src/app/services/login.service';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-post-form',
@@ -11,23 +14,35 @@ export class PostFormComponent {
   postTitle: string = "";
   postContent: string = "";
   errorMessages: string[] = [];
+
+  @Output() refreshPostList = new EventEmitter<void>();
+  post: UserPost = new UserPost;
+  constructor(private postService: PostService, private loginService: LoginService) {
+
+  }
+
   onCreatePost() {
-    console.log("Created Post");
-    console.log(this.postTitle);
-    console.log(this.postContent);
+    this.post.Title = this.postTitle;
+    this.post.Content = this.postContent;
+    this.post.PosterUserId = this.loginService.signedInUser.userId;
+
+    this.postService.createPost(this.post).subscribe({
+      next: (data => {
+      }),
+      error: (error => {
+        console.log(error)
+      })
+      
+    });
   }
   checkTitle() {
-    console.log("Checking Title");
-    console.log(`title length ${this.postTitle.length}`);
-    if (this.postTitle.length > this.maxTitleLength) {
+    this.refreshPostList.emit();
+    if (this.postTitle.length > this.maxTitleLength)
       this.postTitle = this.postTitle.slice(0, this.maxTitleLength);
-    }
+
   }
   checkContent() {
-    console.log("Checking Title");
-    console.log(`content length ${this.postContent.length}`);
-    if (this.postContent.length > this.maxContentLength) {
+    if (this.postContent.length > this.maxContentLength)
       this.postContent = this.postContent.slice(0, this.maxContentLength);
-    }
   }
 }

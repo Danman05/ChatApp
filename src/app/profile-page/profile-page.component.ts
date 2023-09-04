@@ -24,26 +24,7 @@ export class ProfilePageComponent implements OnInit {
       this.route.paramMap.subscribe((params: ParamMap) => {
         this.id = +params.get('id')!;
       });
-      this.userService.GetProfileData(this.id!)
-        .subscribe({
-          next: (result => {
-
-            this.currentUser = result[0];
-            this.isSignedIn = this.loginService.isSignedIn;
-
-            if (this.loginService.signedInUser && this.loginService.signedInUser.userId == this.currentUser.userId)
-              this.ownsAccount = true;
-
-            if (this.isSignedIn && !this.ownsAccount) {
-
-              this.checkFollow();
-            }
-
-          }),
-          error: (error => {
-            console.log(error);
-          }),
-        });
+      this.getProfileData();
     } catch (error) {
       console.log(error);
     }
@@ -74,13 +55,35 @@ export class ProfilePageComponent implements OnInit {
     this.followService.follow(userFollow).subscribe({
       next: (data => {
         console.log(data);
-        this.router.navigate(['app-profile-page', userFollow.followsUserId]);
-
+        this.getProfileData();
       }),
       error: (data => {
         console.log(data);
       })
     })
+  }
+
+  getProfileData() {
+    this.userService.GetProfileData(this.id!)
+      .subscribe({
+        next: (result => {
+
+          this.currentUser = result[0];
+          this.isSignedIn = this.loginService.isSignedIn;
+
+          if (this.loginService.signedInUser && this.loginService.signedInUser.userId == this.currentUser.userId)
+            this.ownsAccount = true;
+
+          if (this.isSignedIn && !this.ownsAccount) {
+
+            this.checkFollow();
+          }
+
+        }),
+        error: (error => {
+          console.log(error);
+        }),
+      });
   }
 
 }

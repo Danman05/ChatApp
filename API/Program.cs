@@ -17,7 +17,7 @@ public class Program
 
         builder.Services.AddDbContext<YeeterDbContext>(options =>
         {
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection2"));
         });
         builder.Services.AddScoped<FollowService>();
         builder.Services.AddCors(options => options.AddPolicy(name:"YeeterOrigins",
