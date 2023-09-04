@@ -1,0 +1,19 @@
+.user-edit-dialog {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 16px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    max-width: 80%;
+}
+
+.card-small {
+    width: 75px;
+    display: inline-flex;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+    box-shadow: none;
+}

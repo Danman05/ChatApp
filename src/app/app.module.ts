@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -14,6 +13,9 @@ import { SignupPageComponent } from './signup-page/signup-page.component';
 import { FormsModule } from '@angular/forms';
 import { UserResultComponent } from './home-page/search/user-result/user-result.component';
 import { PostFormComponent } from './home-page/message-content/post-form/post-form.component';
+import { EditProfileDialogComponent } from './profile-page/edit-profile-dialog/edit-profile-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MessagesComponent } from './home-page/message-content/messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -27,12 +29,15 @@ import { PostFormComponent } from './home-page/message-content/post-form/post-fo
     SignupPageComponent,
     UserResultComponent,
     PostFormComponent,
+    EditProfileDialogComponent,
+    MessagesComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

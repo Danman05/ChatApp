@@ -22,9 +22,9 @@ export class PostFormComponent {
   }
 
   onCreatePost() {
-    this.post.Title = this.postTitle;
-    this.post.Content = this.postContent;
-    this.post.PosterUserId = this.loginService.signedInUser.userId;
+    this.post.title = this.postTitle;
+    this.post.content = this.postContent;
+    this.post.posterUserId = this.loginService.signedInUser.userId;
 
     this.postService.createPost(this.post).subscribe({
       next: (data => {

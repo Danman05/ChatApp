@@ -44,14 +44,14 @@
             <button class="card card-small backarrow" (click)="shouldMoveToNextForm = false"><-- </button>
                     <div class="input-container">
                         <input id="password-input" type="password" [(ngModel)]="password" name="password"
-                            (blur)="checkPassword()" placeholder="password" autocomplete="new-password" />
+                            (blur)="checkPassword()" placeholder="password" autocomplete="new-password" required />
                         <!-- <label for="password-input">Password</label> -->
                     </div>
 
                     <div class="input-container">
                         <input id="password-verify-input" type="password" [(ngModel)]="passwordVerify"
                             name="passwordVerify" (blur)="checkPassword()" placeholder="verify password"
-                            autocomplete="new-password" />
+                            autocomplete="new-password" required />
                         <!-- <label for="password-input">Password</label> -->
                     </div>
 

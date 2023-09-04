@@ -21,24 +21,44 @@ public class PostController : ControllerBase
     }
 
     [HttpGet("GetAll")]
-    public async Task<ActionResult<List<PostedContent>>> GetAllPosts() 
-    {   
-return Ok(await _dbContext.PostedContents.Include(p => p.PosterUser).ToListAsync());
+    public async Task<ActionResult<List<PostedContent>>> GetAllPosts()
+    {
+        try
+        {
+            return Ok(await _dbContext.PostedContents.Include(p => p.PosterUser).ToListAsync());
+        }
+        catch (Exception ex)
+        {
+            // Handle any exceptions that occur during saving changes
+            return BadRequest($"An error occurred: {ex.Message}");
+        }
     }
 
     [HttpPost("Create")]
-    public async Task<ActionResult<List<PostedContent>>> CreatePost(PostedContent post) 
-    {   
-        User user = await _dbContext.Users.FindAsync(post.PosterUserId);
+    public async Task<ActionResult<List<PostedContent>>> CreatePost(PostedContent post)
+    {
+        User? user = await _dbContext.Users.FindAsync(post.PosterUserId);
 
-        PostedContent p = new PostedContent () {
-          Title = post.Title,
-          Content = post.Content,
-          PosterUserId = user.UserId,
-          PosterUser = user
-        };  
-        await _dbContext.PostedContents.AddAsync(p);
-        await _dbContext.SaveChangesAsync();
-        return Ok(await _dbContext.PostedContents.ToListAsync());
+        if (user == null)
+            return BadRequest("User not found"); // Changed the error message
+
+        PostedContent p = new PostedContent()
+        {
+            Title = post.Title,
+            Content = post.Content,
+            PosterUserId = user.UserId,
+            PosterUser = user
+        };
+        try
+        {
+            await _dbContext.PostedContents.AddAsync(p);
+            await _dbContext.SaveChangesAsync();
+            return Ok(await _dbContext.PostedContents.ToListAsync());
+        }
+        catch (Exception ex)
+        {
+            // Handle any exceptions that occur during saving changes
+            return BadRequest($"An error occurred: {ex.Message}");
+        }
     }
 }

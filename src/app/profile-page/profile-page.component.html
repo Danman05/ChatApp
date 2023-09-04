@@ -6,7 +6,7 @@
         <h2>@{{ currentUser.username }}</h2>
         <!-- More functionality -->
         <div *ngIf="isSignedIn">
-            <button class="card card-small" *ngIf="ownsAccount">Edit Profile</button>
+            <button class="card card-small" (click)="editProfileDialog('0ms', '0ms')" *ngIf="ownsAccount">Edit Profile</button>
             <button class="card card-small" *ngIf="!ownsAccount && !isFollowingUser" (click)="followUser()">Follow</button>
             <button class="card card-small" *ngIf="!ownsAccount && isFollowingUser" (click)="followUser()">Unfollow</button>
         </div>
@@ -25,12 +25,12 @@
     </div>
     <div class="userInfoBottom">
         <h3>Join Date</h3>
-        <span>{{ currentUser.accountCreationDate | date: 'dd/MM/YYYY' }}</span>
+        <span>{{ currentUser.accountCreationDate | date: 'dd/MM/YYYY'}}</span>
     </div>
 </div>
 
 <div *ngIf="!currentUser">
-    Profile not found
+Loading Profile
 </div>
 
 

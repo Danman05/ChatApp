@@ -8,9 +8,8 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 const routes: Routes = [
   { path: 'app-signup-page', component: SignupPageComponent},
   { path: 'app-login-page', component: LoginPageComponent},
-  // { path: 'app-home-page', component: HomePageComponent},
   { path: 'app-profile-page/:id', component: ProfilePageComponent},
-  {path: '**', component: HomePageComponent}
+  {path: '**', component: HomePageComponent},
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +10,6 @@ namespace API.Controllers;
 [Route("[controller]")]
 public class UserController : ControllerBase
 {
-
     private readonly YeeterDbContext _dbContext;
 
     public UserController(YeeterDbContext dbContext)
@@ -24,9 +24,9 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("GetOne")]
-    public async Task<ActionResult<List<User>>> GetOne(int id)
+    public async Task<ActionResult<List<ProfileResult>>> GetOne(int id)
     {
-        return Ok(await _dbContext.Users.FindAsync(id));
+        return Ok(await _dbContext.ProfileResults.FindAsync(id));
     }
     [HttpPost("Register")]
     public async Task<ActionResult<List<User>>> Register(User user)
@@ -81,19 +81,32 @@ public class UserController : ControllerBase
     }
 
     [HttpPut("EditProfile")]
-    public async Task<ActionResult<List<User>>> EditProfile(ProfileResult profile)
+    public async Task<ActionResult<List<ProfileResult>>> EditProfile(ProfileResult profile)
     {
-        User uprofile = await _dbContext.Users.FindAsync(profile.UserId);
+        User? uprofile = await _dbContext.Users.FindAsync(profile.UserId);
+
 
         if (uprofile == null)
-            return BadRequest("Hero not founds");
+            return BadRequest("User not found"); // Changed the error message
 
+        if (profile.DisplayName == null)
+            return BadRequest("ProfileResult not found");
+
+        // Update user profile properties
         uprofile.DisplayName = profile.DisplayName;
         uprofile.ProfilePicturePath = profile.ProfilePicturePath;
         uprofile.IsPrivate = profile.IsPrivate;
-
-        await _dbContext.SaveChangesAsync();
-        return Ok(await _dbContext.ProfileResults.ToListAsync());
+        try
+        {
+            await _dbContext.SaveChangesAsync();
+            return Ok("Profile updated successfully");
+        }
+        catch (Exception ex)
+        {
+            // Handle any exceptions that occur during saving changes
+            return BadRequest($"An error occurred: {ex.Message}");
+        }
     }
+
 
 }

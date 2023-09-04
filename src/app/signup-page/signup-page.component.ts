@@ -81,7 +81,7 @@ export class SignupPageComponent {
               next: (data => {
                 this.userService.userList = data;
                 this.signedUpUser = this.userService.userList.find(x => x.username == this.username);
-                this.router.navigate(['/app-profile-page', this.signedUpUser?.userId]);
+                this.router.navigate(['/app-login-page']);
               }),
             });
         }),

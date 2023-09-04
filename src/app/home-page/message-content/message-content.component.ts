@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserPost } from 'src/app/Model/userPost';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
@@ -8,7 +8,7 @@ import { PostService } from 'src/app/services/post.service';
   templateUrl: './message-content.component.html',
   styleUrls: ['./message-content.component.scss']
 })
-export class MessageContentComponent {
+export class MessageContentComponent implements OnInit {
 
   isSignedIn$ = this.authService.isLoggedIn$;
   showPostForm = false; // Initially hidden
@@ -16,6 +16,9 @@ export class MessageContentComponent {
   postList: UserPost[] = [];
 
   constructor(private authService: AuthService, private postService: PostService) {
+  }
+  ngOnInit(): void {
+    this.refreshPostList();
   }
   
   togglePostForm() {
@@ -26,6 +29,9 @@ export class MessageContentComponent {
     this.postService.getPosts().subscribe({
       next: (data => {
         this.postList = data;
+        this.postList.forEach(element => {
+          console.log(element.posterUser?.displayName);
+        });
         console.log(this.postList);
       }),
       error: (error => {

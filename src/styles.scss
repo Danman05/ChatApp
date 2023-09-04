@@ -1,15 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 @import '../src/variables.scss';
 
+html {
+    position: fixed;
+    height: 100%;
+    overflow: hidden;
+}
+
 body {
     margin: 0;
-    padding: 0;
+    width: 100vw;
+    height: 100%;
+    overflow-y: auto;
     overflow-x: hidden;
-    // background-image: url('./assets/background.jpg');
-    // background-repeat: no-repeat;
-    // background-size:cover;
-    // background-position: center;
-    // background-attachment: fixed;
+    -webkit-overflow-scrolling: touch;
 }
 
 .card {

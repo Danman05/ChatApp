@@ -17,7 +17,7 @@ public class Program
 
         builder.Services.AddDbContext<YeeterDbContext>(options =>
         {
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection2"));
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
         });
         builder.Services.AddScoped<FollowService>();
         builder.Services.AddCors(options => options.AddPolicy(name:"YeeterOrigins",
@@ -25,6 +25,7 @@ public class Program
             policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
         }
         ));
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -38,7 +39,6 @@ public class Program
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
-
 
         app.MapControllers();
 

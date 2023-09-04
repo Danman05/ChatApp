@@ -1,5 +1,9 @@
+import { userProfile } from "./userProfile";
+
 export class UserPost {
-    Title?: string;
-    Content?: string;
-    PosterUserId?: number;
+    title?: string;
+    content?: string;
+    posterUserId?: number;
+    posterUser?: userProfile;
+    blogCreationDate?: Date;
 }
