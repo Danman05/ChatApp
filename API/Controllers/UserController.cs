@@ -53,11 +53,20 @@ public class UserController : ControllerBase
 
         // Remove user references from UserFollowers
         List<UserFollower> userFollowers = await _dbContext.UserFollowers
-            .Where(uf => uf.ThisUserId == id || uf.FollowsUserId == id)
+            .Where(uf => uf.ThisUserId == foundUser.UserId || uf.FollowsUserId == foundUser.UserId)
             .ToListAsync();
-            
+        
+        List<PostedContent> postedContents = await _dbContext.PostedContents
+        .Where(pc => pc.PosterUserId == foundUser.UserId).ToListAsync();
+
         if (userFollowers.Count > 0) {
             _dbContext.UserFollowers.RemoveRange(userFollowers);
+
+            await _dbContext.SaveChangesAsync();
+        }
+
+        if(postedContents.Count > 0) {
+            _dbContext.PostedContents.RemoveRange(postedContents);
 
             await _dbContext.SaveChangesAsync();
         }

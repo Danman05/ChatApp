@@ -30,4 +30,5 @@ export class UserDataService {
   EditUser(user: userProfile): Observable<userProfile[]> {
     return this.httpClient.put<userProfile[]>(`${this.endpoint}EditProfile`, user);
   }
+  
 }

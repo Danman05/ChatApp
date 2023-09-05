@@ -1,19 +1,25 @@
+@import '../../../../variables.scss';
+
 .wrap {
     width: 100%;
-        position: relative;
-        left: 0;
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;}
+    position: relative;
+    left: 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
 .messageContainer {
     background-color: rgba(0, 0, 0, 0.4);
     padding: 24px;
     border-radius: 20px;
     margin: 20px;
-    width: 300px;
+    max-width: 750px;
+    min-width: 300px;
+    width: 60%;
 }
 
 .userHeader {
@@ -54,4 +60,13 @@
 .post-timestamp {
     text-align: right;
     color: #657786;
+}
+
+a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    /* Remove default underline */
+    color: $webPrimaryColor;
+    /* Change link color */
 }

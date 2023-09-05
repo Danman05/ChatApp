@@ -22,12 +22,27 @@
                 <!-- <label for="display-name-input">Display Name</label> -->
             </div>
 
-            <div class="input-container">
+            <!-- <div class="input-container">
+
                 <input id="picture-path-input" type="text" [(ngModel)]="profilePicturePath" name="profilePicturePath"
                     placeholder="picture path" required />
-                <!-- <label for="picture-path-input">Profile picture</label> -->
+                <label for="picture-path-input">Use default image or upload your own</label>
+            </div> -->
+            <div class="input-container">
+
+                    <!-- <label for="picture-path-input">Profile Picture:</label> -->
+                    <input type="file" id="picture-path-input" name="profilePicture" (change)="onFileChange($event)"
+                    placeholder="Default image" accept="image/*" hidden>
+                    <label for="picture-path-input">Upload image</label>
             </div>
-            <div class="input-container default-image">
+
+            <!-- Display the uploaded image if available -->
+            <div class="input-container" *ngIf="profilePicturePath">
+                Image preview:
+                    <img [src]="profilePicturePath" alt="Profile Picture" width="100">
+             
+            </div>
+            <!-- <div class="input-container default-image">
                 images:
                 <input type="radio" value="../../assets/guest.png" name="profile-image" (change)="onRadioChange($event)"
                     checked>
@@ -35,8 +50,8 @@
                     (change)="onRadioChange($event)">
                 <input type="radio" value="../../assets/guest3.png" name="profile-image"
                     (change)="onRadioChange($event)">
-                <img src="{{profilePicturePath}}" *ngIf="profilePicturePath" width="50" height="50">
-            </div>
+                <img src="{{profilePicturePath}}" *ngIf="profilePicturePath">
+            </div> -->
             <button class="card card-small" (click)="shouldMoveToNextForm = true">Next</button>
         </div>
         <!-- Next part of form -->
@@ -56,8 +71,8 @@
                     </div>
 
                     <div class="input-container">
-                        Private account: <input id="private-checkbox" type="checkbox" [(ngModel)]="isPrivate" name="isPrivate"
-                            required />
+                        Private account: <input id="private-checkbox" type="checkbox" [(ngModel)]="isPrivate"
+                            name="isPrivate" required />
                         <!-- <label for="private-checkbox">Private Account</label> -->
                     </div>
 

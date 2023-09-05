@@ -2,6 +2,11 @@
 @import '../src/variables.scss';
 
 html {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     position: fixed;
     height: 100%;
     overflow: hidden;
@@ -33,11 +38,13 @@ body {
     line-height: 12px;
     cursor: pointer;
 }
+
 .card.card-small {
     height: 16px;
     width: 168px;
     color: $webSecondaryColor;
 }
+
 .card-container .card:not(.highlight-card):hover {
     transform: translateY(-3px);
 }

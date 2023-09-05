@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { UserCred } from '../Model/userCred';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
@@ -10,16 +10,20 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent {
-
   constructor(private loginService: LoginService, private router: Router, private authService: AuthService) {
   }
   async SignIn(usercred: UserCred) {
     const isSignedIn = await this.loginService.signIn(usercred);
-    
-    if (isSignedIn) {
+
+    if (isSignedIn && usercred.username != "Admin") {
       // Navigate to profile page
       this.authService.setIsLoggedIn(true);
       this.router.navigate(['app-profile-page', this.loginService.signedInUser.userId]);
+    }
+    else if (isSignedIn && usercred.username == "Admin") {
+      this.authService.setIsLoggedIn(true);
+      this.router.navigate(['admin']);
+
     }
   }
 }

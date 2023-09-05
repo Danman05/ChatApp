@@ -8,12 +8,17 @@ import { UserPost } from '../Model/userPost';
 export class PostService {
 
     endpoint: string = 'http://localhost:5006/Post/';
+
+    publicPostList: UserPost[] = [];
     constructor(private httpClient: HttpClient) { }
 
     createPost(userPost: UserPost): Observable<UserPost[]> {
         return this.httpClient.post<UserPost[]>(`${this.endpoint}Create`, userPost);
     }
-    getPosts(): Observable<UserPost[]> {
+    getPublicPosts(): Observable<UserPost[]> {
+        return this.httpClient.get<UserPost[]>(`${this.endpoint}GetAllPublic`);
+    }
+    getPosts():Observable<UserPost[]> {
         return this.httpClient.get<UserPost[]>(`${this.endpoint}GetAll`);
     }
 }

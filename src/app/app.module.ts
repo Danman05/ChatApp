@@ -16,6 +16,8 @@ import { PostFormComponent } from './home-page/message-content/post-form/post-fo
 import { EditProfileDialogComponent } from './profile-page/edit-profile-dialog/edit-profile-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MessagesComponent } from './home-page/message-content/messages/messages.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminBoardComponent } from './admin/admin-board/admin-board.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { MessagesComponent } from './home-page/message-content/messages/messages
     PostFormComponent,
     EditProfileDialogComponent,
     MessagesComponent,
+    AdminComponent,
+    AdminBoardComponent,
   ],
   imports: [
     BrowserModule,

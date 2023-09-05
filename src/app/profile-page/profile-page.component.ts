@@ -14,6 +14,7 @@ import { EditProfileDialogComponent } from './edit-profile-dialog/edit-profile-d
   styleUrls: ['./profile-page.component.scss']
 })
 export class ProfilePageComponent implements OnInit {
+  
   currentUser!: userProfile;
   ownsAccount: boolean = false;
   isSignedIn: boolean = false;

@@ -1,14 +1,48 @@
+@import '../../../variables.scss';
 .user-edit-dialog {
     position: fixed;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 16px;
+    background-color: $webPrimaryColor;
+    padding: 30px 60px;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     max-width: 80%;
 }
-
+.form-group {
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.form-group input,
+label {
+    border: 0;
+    border-bottom: 1px solid #555;
+    background: transparent;
+    // width: 100%;
+    padding: 8px 0 5px 0;
+    font-size: 16px;
+    color: $webSecondaryColor;
+}
+.form-group input:focus,
+label:hover {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid $webSecondaryColor;
+}
+img {
+    width: 100px;
+    /* adjust the size as needed */
+    height: 100px;
+    /* adjust the size as needed */
+    object-fit: fill;
+    border-radius: 50%;
+    margin-top: 10px;
+}
 .card-small {
     width: 75px;
     display: inline-flex;

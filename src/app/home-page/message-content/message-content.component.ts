@@ -28,11 +28,8 @@ export class MessageContentComponent implements OnInit {
   refreshPostList() {
     this.postService.getPosts().subscribe({
       next: (data => {
-        this.postList = data;
-        this.postList.forEach(element => {
-          console.log(element.posterUser?.displayName);
-        });
-        console.log(this.postList);
+        this.postService.publicPostList = data;
+        this.postList = this.postService.publicPostList;
       }),
       error: (error => {
         console.log(error);

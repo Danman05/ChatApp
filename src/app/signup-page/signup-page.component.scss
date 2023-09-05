@@ -28,17 +28,20 @@ h2 {
     margin-top: 5px;
     margin-bottom: 5px;
     color: $webSecondaryColor;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
-.input-container label {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    font-size: 16px;
-    transition: all 0.5s ease-in-out;
-}
+// .input-container label {
+//     position: absolute;
+//     top: 0px;
+//     left: 0px;
+//     font-size: 16px;
+//     transition: all 0.5s ease-in-out;
+// }
 
-.input-container input {
+.input-container input, label {
     border: 0;
     border-bottom: 1px solid #555;
     background: transparent;
@@ -48,18 +51,18 @@ h2 {
     color: $webSecondaryColor;
 }
 
-.input-container input:focus {
+.input-container input:focus, label:hover {
     border: none;
     outline: none;
     border-bottom: 1px solid $webSecondaryColor;
 }
 
-.input-container input:focus~label,
-.input-container input:valid~label {
-    top: -12px;
-    font-size: 12px;
+// .input-container input:focus~label,
+// .input-container input:valid~label {
+//     top: -12px;
+//     font-size: 12px;
 
-}
+// }
 
 .signUp p,
 a {
@@ -84,5 +87,15 @@ a:hover {
 }
 
 .error-message {
- color: red;
+    color: red;
+}
+
+img {
+    width: 50px;
+    /* adjust the size as needed */
+    height: 50px;
+    /* adjust the size as needed */
+    object-fit: fill;
+    border-radius: 50%;
+    margin-top: 10px;
 }

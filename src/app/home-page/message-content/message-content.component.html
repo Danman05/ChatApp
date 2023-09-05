@@ -1,5 +1,3 @@
-<!-- <button class="card card-small" *ngIf="(isSignedIn$ | async) === true && !showPostForm" (click)="togglePostForm()">Create Post</button>
-<button class="card card-small" *ngIf="(isSignedIn$ | async) === true && showPostForm" (click)="togglePostForm()">Cancel</button> -->
 <button class="card card-small" *ngIf="(isSignedIn$ | async) === true" (click)="togglePostForm()">
     {{ showPostForm ? 'Cancel' : 'Create Post' }}
 </button>

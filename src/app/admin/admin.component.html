@@ -1,0 +1,18 @@
+<div *ngIf="adminLogin">
+    <!-- Admin code goes here -->
+    
+</div>
+    <div class="dashboard">
+        <h1>Admin dashboard</h1>
+        <app-admin-board [userList]="userList" [postList]="postList"></app-admin-board>
+    </div>
+
+
+
+
+
+<!-- Login if not admin -->
+
+<div *ngIf="adminLogin">
+    <app-login-page></app-login-page>
+</div>

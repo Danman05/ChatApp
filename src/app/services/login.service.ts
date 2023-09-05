@@ -13,17 +13,24 @@ export class LoginService {
 
   signedInUser!: userProfile;
   isSignedIn:boolean = false;
-  
+  isAdmin = false;
   constructor(private authService: AuthService) { }
   
   async signIn(credentials: UserCred): Promise<boolean> {
     this.isSignedIn = false;
-
+  
     try {
       const data = await this.authService.LogIn(credentials).toPromise();
 
-      if (data && data.length > 0) {
+      if (data && data.length > 0 && data[0].username !== 'Admin') {
         this.signedInUser = data[0];
+        this.isSignedIn = true;
+        return true;
+      }
+      if(data && data.length > 0 && data[0].username === 'Admin' ) {
+        console.log(data);
+        this.signedInUser = data[0];
+        this.isAdmin = true;
         this.isSignedIn = true;
         return true;
       }

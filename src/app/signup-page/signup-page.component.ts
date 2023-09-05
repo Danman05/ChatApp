@@ -10,12 +10,12 @@ import { userProfile } from '../Model/userProfile';
   styleUrls: ['./signup-page.component.scss']
 })
 export class SignupPageComponent {
-  
+
   username: string = '';
   password: string = '';
   passwordVerify: string = '';
   displayName: string = '';
-  profilePicturePath?: string;
+  profilePicturePath?: string = '../../assets/guest.png';
   isPrivate: boolean = false;
 
   shouldMoveToNextForm: boolean = false;
@@ -38,7 +38,7 @@ export class SignupPageComponent {
     else
       this.errorMessages[0] = "";
 
-    if(this.username.length < 1)
+    if (this.username.length < 1)
       this.errorMessages[1] = "Username not long enough";
     else
       this.errorMessages[1] = "";
@@ -89,5 +89,21 @@ export class SignupPageComponent {
           console.error('Error registering user', error);
         }),
       });
+  }
+  onFileChange(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.convertToBase64(file);
+    }
+  }
+
+  private convertToBase64(file: File): void {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      this.profilePicturePath = reader.result as string;
+    };
+
+    reader.readAsDataURL(file);
   }
 }

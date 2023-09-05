@@ -1,0 +1,29 @@
+<h2>User table</h2>
+<table class="mat-table">
+    <tr>
+        <th></th>
+        <th>User ID</th>
+        <th class="lessImportant">Profile Picture</th>
+        <th>@username</th>
+        <th class="notImportant">Display Name</th>
+        <th class="notImportant">Verified</th>
+        <th>Private</th>
+        <th>Creation Date</th>
+
+    </tr>
+    <tr *ngFor="let user of userList">
+        <td>
+            <Button>Edit</Button>
+            <Button>Delete</Button>
+        </td>
+        <td>{{ user.userId }}</td>
+        <td class="lessImportant"><img src="{{ user.profilePicturePath }}"></td>
+        <td>{{ user.username }}</td>
+        <td class="notImportant">{{ user.displayName }}</td>
+        <td class="notImportant">{{ user.isVerified }}</td>
+        <td>{{ user.isPrivate }}</td>
+        <td>{{ user.accountCreationDate | date: 'dd/MM/YYYY HH:mm'}}</td>
+
+
+    </tr>
+</table>

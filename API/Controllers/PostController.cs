@@ -25,7 +25,25 @@ public class PostController : ControllerBase
     {
         try
         {
-            return Ok(await _dbContext.PostedContents.Include(p => p.PosterUser).ToListAsync());
+            return Ok(await _dbContext.PostedContents
+            .Include(p => p.PosterUser)
+            .ToListAsync());
+        }
+        catch (Exception ex)
+        {
+            // Handle any exceptions that occur during saving changes
+            return BadRequest($"An error occurred: {ex.Message}");
+        }
+    }
+    [HttpGet("GetAllPublic")]
+    public async Task<ActionResult<List<PostedContent>>> GetAllPublicPosts()
+    {
+        try
+        {
+            return Ok(await _dbContext.PostedContents
+            .Include(p => p.PosterUser)
+            .Where(p => !p.PosterUser.IsPrivate )
+            .ToListAsync());
         }
         catch (Exception ex)
         {

@@ -4,21 +4,20 @@
 
     <form (ngSubmit)="onEdit()" #editForm="ngForm">
         <div class="form-group">
-            <label for="displayName">Display Name:</label>
+            Display Name: 
             <input type="text" id="displayName" name="displayName" [(ngModel)]="data.user.displayName"
                placeholder="{{ data.user.displayName}}" class="form-control" required>
         </div>
 
         <div class="form-group">
-            <label for="profilePicture">Profile Picture:</label>
+            <label for="profilePicture">Change profile picture</label>
             <input type="file" id="profilePicture" name="profilePicture" (change)="onFileChange($event)"
-                accept="image/*" class="form-control">
+                accept="image/*" class="form-control" hidden>
         </div>
 
         <!-- Display the uploaded image if available -->
         <div class="form-group" *ngIf="data.user.profilePicturePath">
-            <label>Uploaded Image:</label>
-            <img [src]="data.user.profilePicturePath" alt="Profile Picture" width="100">
+            <img [src]="data.user.profilePicturePath" alt="Profile Picture">
         </div>
         <div class="form-check">
             <input type="checkbox" id="privateAccount" name="privateAccount" [(ngModel)]="data.user.isPrivate"
