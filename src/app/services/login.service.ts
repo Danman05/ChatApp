@@ -28,6 +28,7 @@ export class LoginService {
         return true;
       }
       if(data && data.length > 0 && data[0].username === 'Admin' ) {
+        console.log(data);
         this.signedInUser = data[0];
         this.isAdmin = true;
         this.isSignedIn = true;
@@ -44,7 +45,6 @@ export class LoginService {
   signOut() {
     this.signedInUser = null!;
     this.isSignedIn = false;
-    this.isAdmin = false;
   }
 
   getSign() {

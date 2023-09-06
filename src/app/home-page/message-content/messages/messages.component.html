@@ -1,22 +1,22 @@
 <div class="wrap">
     <div class="messageContainer" *ngFor="let post of postList">
-        <div class="messageCard">
-            <div class="userHeader">
-                <a [routerLink]="['/app-profile-page', post.posterUser?.userId]">
-                    <img class="userImage" src="{{ post.posterUser?.profilePicturePath }}" width="40" height="40">
-                    <div class="post-username">{{ post.posterUser?.displayName }}</div>
-                    <div class="post-handle">@{{ post.posterUser?.username }}</div>
-                </a>
+            <div class="messageCard">
+                <div class="userHeader">
+                    <a [routerLink]="['/app-profile-page', post.posterUser?.userId]">
+                        <img class="userImage" src="{{ post.posterUser?.profilePicturePath }}" width="40" height="40">
+                        <div class="post-username">{{ post.posterUser?.displayName }}</div>
+                        <div class="post-handle">@{{ post.posterUser?.username }}</div>
+                    </a>
+                </div>
+                <div class="post-title">
+                    <h3>{{ post.title }}</h3>
+                </div>
+                <div class="post-content">
+                    <p>{{ post.content }}</p>
+                </div>
+                <div class="post-timestamp">
+                    {{ post.blogCreationDate | date: 'dd/MM/YYYY'}}
+                </div>
             </div>
-            <div class="post-title">
-                <h3>{{ post.title }}</h3>
-            </div>
-            <div class="post-content">
-                <p>{{ post.content }}</p>
-            </div>
-            <div class="post-timestamp">
-                {{ post.blogCreationDate | date: 'HH:mm dd/MM/YYYY ' }}
-            </div>
-        </div>
     </div>
 </div>

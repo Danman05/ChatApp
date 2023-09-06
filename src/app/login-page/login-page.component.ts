@@ -10,8 +10,6 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent {
-
-  @Output() logInUpdater = new EventEmitter<void>();
   constructor(private loginService: LoginService, private router: Router, private authService: AuthService) {
   }
   async SignIn(usercred: UserCred) {
@@ -19,12 +17,10 @@ export class LoginPageComponent {
 
     if (isSignedIn && usercred.username != "Admin") {
       // Navigate to profile page
-      this.logInUpdater.emit();
       this.authService.setIsLoggedIn(true);
       this.router.navigate(['app-profile-page', this.loginService.signedInUser.userId]);
     }
     else if (isSignedIn && usercred.username == "Admin") {
-      this.logInUpdater.emit();
       this.authService.setIsLoggedIn(true);
       this.router.navigate(['admin']);
 

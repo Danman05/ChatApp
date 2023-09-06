@@ -64,6 +64,7 @@ export class SignupPageComponent {
       return;
     }
 
+
     const userData: UserDB = {
       username: this.username,
       password: this.password,
@@ -88,7 +89,6 @@ export class SignupPageComponent {
           console.error('Error registering user', error);
         }),
       });
-      
   }
   onFileChange(event: any): void {
     const file = event.target.files[0];
