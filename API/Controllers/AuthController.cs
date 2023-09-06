@@ -15,6 +15,13 @@ public class AuthController : ControllerBase
     {
         _dbContext = dbContext;
     }
+
+    /// <summary>
+    /// Get Request - Executes stored procedure LogInUser
+    /// </summary>
+    /// <param name="username"></param>
+    /// <param name="password"></param>
+    /// <returns>Returns user details from the logged in user, excluding password</returns>
     [HttpGet("Login")]
     public async Task<ActionResult<List<ProfileResult>>> LogInUser(string username, string password)
     {

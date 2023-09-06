@@ -20,9 +20,6 @@ public partial class YeeterDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<UserFollower> UserFollowers { get; set; }
-
-    public virtual DbSet<NewUser> NewUsers { get; set; }
-
     public virtual DbSet<FollowerResult> FollowerResults { get; set; }
 
     public DbSet<ProfileResult> ProfileResults { get; set; }

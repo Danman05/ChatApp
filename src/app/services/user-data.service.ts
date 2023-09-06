@@ -30,5 +30,7 @@ export class UserDataService {
   EditUser(user: userProfile): Observable<userProfile[]> {
     return this.httpClient.put<userProfile[]>(`${this.endpoint}EditProfile`, user);
   }
-  
+  DeleteUser(user: userProfile): Observable<userProfile[]> {
+    return this.httpClient.delete<userProfile[]>(`${this.endpoint}Delete?id=${user.userId}`);
+  }
 }

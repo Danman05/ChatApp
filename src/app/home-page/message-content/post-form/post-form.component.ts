@@ -28,6 +28,7 @@ export class PostFormComponent {
 
     this.postService.createPost(this.post).subscribe({
       next: (data => {
+        console.log(data);
       }),
       error: (error => {
         console.log(error)

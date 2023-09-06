@@ -10,13 +10,11 @@ import { userProfile } from '../Model/userProfile';
 
 export class HomePageComponent implements OnInit{
 
-  userList!: userProfile[];
   
-  constructor(private userService: UserDataService) {
+  constructor() {
 
   }
   ngOnInit(): void {
-    this.userList = this.userService.userList;
   }
 }
 

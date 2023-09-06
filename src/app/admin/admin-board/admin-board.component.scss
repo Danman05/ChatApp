@@ -10,9 +10,10 @@ table {
     text-align: center;
 }
 
-// tr, td {
-//     border: 1px solid $webPrimaryColor
-// }
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
 @media screen and (max-width: 600px) {
     .notImportant {
         display: none;

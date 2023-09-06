@@ -1,11 +1,12 @@
 <div *ngIf="adminLogin">
-    <!-- Admin code goes here -->
-    
 </div>
+    <!-- Admin code goes here -->
     <div class="dashboard">
         <h1>Admin dashboard</h1>
-        <app-admin-board [userList]="userList" [postList]="postList"></app-admin-board>
+        
+        <app-admin-board (callDeleteUser)="DeleteUser($event)" (callEditUser)="editProfileDialog('0ms', '0ms', $event)" [userList]="userList" [postList]="postList"></app-admin-board>
     </div>
+    
 
 
 
@@ -13,6 +14,6 @@
 
 <!-- Login if not admin -->
 
-<div *ngIf="adminLogin">
-    <app-login-page></app-login-page>
+<div *ngIf="!adminLogin">
+    <app-login-page (logInUpdater)="logInUpdater()" ></app-login-page>
 </div>
