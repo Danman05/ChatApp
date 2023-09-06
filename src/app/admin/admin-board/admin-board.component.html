@@ -1,5 +1,61 @@
 <h2>User table</h2>
-<table class="mat-table">
+
+<div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+    </mat-paginator>
+    <table mat-table [dataSource]="userdataSource">
+
+        <ng-container matColumnDef="Buttons">
+            <th mat-header-cell *matHeaderCellDef> Buttons</th>
+            <td mat-cell *matCellDef="let element">
+                <Button (click)="editUser(element)">Edit</Button>
+                <Button (click)="deleteUser(element)">Delete</Button>
+            </td>
+        </ng-container>
+        <!-- Position Column -->
+        <ng-container matColumnDef="User ID">
+            <th mat-header-cell *matHeaderCellDef> User ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="Profile Picture">
+            <th class="lessImportant" mat-header-cell *matHeaderCellDef> Profile Picture </th>
+
+            <td class="lessImportant" mat-cell *matCellDef="let element"><img src="{{element.profilePicturePath}}"> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="@Username">
+            <th mat-header-cell *matHeaderCellDef> @Username </th>
+            <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Display Name">
+            <th class="notImportant" mat-header-cell *matHeaderCellDef> Display Name </th>
+            <td class="notImportant" mat-cell *matCellDef="let element"> {{element.displayName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Verified">
+            <th class="notImportant" mat-header-cell *matHeaderCellDef> Verified </th>
+            <td class="notImportant" mat-cell *matCellDef="let element"> {{element.isVerified}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Private">
+            <th class="notImportant" mat-header-cell *matHeaderCellDef> Private </th>
+            <td class="notImportant"mat-cell *matCellDef="let element"> {{element.isPrivate}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Creation Date">
+            <th mat-header-cell *matHeaderCellDef> Creation Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.accountCreationDate | date: 'dd/MM/YYYY HH:mm'}} </td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="displayedUserColoumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedUserColoumns;"></tr>
+    </table>
+
+</div>
+<!-- <table class="mat-table">
     <tr>
         <th></th>
         <th>User ID</th>
@@ -13,8 +69,8 @@
     </tr>
     <tr *ngFor="let user of userList">
         <td>
-            <Button>Edit</Button>
-            <Button>Delete</Button>
+            <Button (click)="editUser(user)">Edit</Button>
+            <Button (click)="deleteUser(user)">Delete</Button>
         </td>
         <td>{{ user.userId }}</td>
         <td class="lessImportant"><img src="{{ user.profilePicturePath }}"></td>
@@ -26,4 +82,4 @@
 
 
     </tr>
-</table>
+</table> -->

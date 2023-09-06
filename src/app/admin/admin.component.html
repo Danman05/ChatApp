@@ -4,7 +4,7 @@
 </div>
     <div class="dashboard">
         <h1>Admin dashboard</h1>
-        <app-admin-board [userList]="userList" [postList]="postList"></app-admin-board>
+        <app-admin-board (callEditUser)="test()" (callDeleteUser)="test()" [userList]="userList" [postList]="postList"></app-admin-board>
     </div>
 
 

@@ -4,6 +4,7 @@ import { UserPost } from '../Model/userPost';
 import { LoginService } from '../services/login.service';
 import { PostService } from '../services/post.service';
 import { UserDataService } from '../services/user-data.service';
+import { NEVER, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin',
@@ -38,7 +39,8 @@ export class AdminComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    
+    // this.userList = this.userService.GetData();
+    // this.postList = this.postService.getPosts();
   }
   test(){
     console.log("test");
