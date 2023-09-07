@@ -33,9 +33,15 @@ export class AdminComponent implements OnInit {
   }
   editPost(post: UserPost) {
     console.log(post);
+    this.postService.editPost(post).subscribe(res => {
+      console.log(res);
+      this.refreshPost();
+    })
   }
   deletePost(post: UserPost) {
-    console.log(post);
+    this.postService.deletePost(post).subscribe(res => {
+    this.refreshPost();
+  })
   }
 
   refreshUser() {
