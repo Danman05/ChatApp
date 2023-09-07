@@ -23,8 +23,6 @@ export class PostService {
         return this.httpClient.get<UserPost[]>(`${this.endpoint}GetAll`);
     }
     editPost(post: UserPost): Observable<UserPost> {
-        post.title = "WoW";
-        post.content = "Hell2";
         return this.httpClient.put<UserPost>(`${this.endpoint}EditPost`, post);
     }
     deletePost(post: UserPost): Observable<UserPost[]> {

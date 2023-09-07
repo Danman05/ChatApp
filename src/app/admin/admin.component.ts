@@ -4,7 +4,6 @@ import { UserPost } from '../Model/userPost';
 import { LoginService } from '../services/login.service';
 import { PostService } from '../services/post.service';
 import { UserDataService } from '../services/user-data.service';
-import { NEVER, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin',
@@ -26,10 +25,17 @@ export class AdminComponent implements OnInit {
   }
   editUser(user: userProfile) {
     console.log(user);
+    this.userService.EditUser(user).subscribe(res => {
+      console.log(res);
+      this.refreshUser();
+    })
   }
   deleteUser(user: userProfile) {
-    
     console.log(user);
+    this.userService.deleteUser(user).subscribe(res => {
+      console.log(res);
+      this.refreshUser();
+    })
   }
   editPost(post: UserPost) {
     console.log(post);

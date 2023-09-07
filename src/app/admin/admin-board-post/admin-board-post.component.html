@@ -1,3 +1,7 @@
+<!--
+     Post table component
+     Table is made out from Angular material 
+-->
 <mat-form-field>
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
@@ -14,7 +18,7 @@
             <button mat-button (click)="deletePost(element)">Delete</button>
         </td>
     </ng-container>
-    <!-- Position Column -->
+
     <ng-container matColumnDef="Post ID">
         <th mat-header-cell *matHeaderCellDef> Post ID </th>
         <td mat-cell *matCellDef="let element"> {{element.postId}} </td>
@@ -24,7 +28,6 @@
         <td mat-cell *matCellDef="let element"> {{element.posterUser.username}} </td>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="Title">
         <th class="lessImportant" mat-header-cell *matHeaderCellDef> Title </th>
 
