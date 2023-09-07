@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { LoginService } from '../services/login.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,7 @@ export class HeaderComponent {
 
   isMenuOpen = false;
   // isSignedIn: boolean;
-  isSignedIn$ = this.authService.isLoggedIn$;
+  isSignedIn$: Observable<boolean> = this.authService.isLoggedIn$;
 
   constructor(private authService: AuthService, private router: Router, private loginService: LoginService) {} 
   emitSignOut(): void {

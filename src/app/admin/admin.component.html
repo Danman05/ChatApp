@@ -1,20 +1,16 @@
-<div *ngIf="adminLogin">
-    <!-- Admin code goes here -->
-    
-</div>
+<ng-container *ngIf="(adminLogin$ | async) === true">
+    <!-- Admin code goes here --> 
     <div class="dashboard">
         <h3>User Table</h3>
         <app-admin-board (callEditUser)="editUser($event)" (callDeleteUser)="deleteUser($event)" [userList]="userList"></app-admin-board>
         <h3>Post Table</h3>
         <app-admin-board-post (callEditPost)="editPost($event)" (callDeletePost)="deletePost($event)" [postList]="postList"></app-admin-board-post>
     </div>
-
-
-
+</ng-container>
 
 
 <!-- Login if not admin -->
 
-<div *ngIf="adminLogin">
+<ng-container *ngIf="(adminLogin$ | async) === false">
     <app-login-page></app-login-page>
-</div>
+</ng-container>

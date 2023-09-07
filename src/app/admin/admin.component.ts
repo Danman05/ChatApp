@@ -4,6 +4,8 @@ import { UserPost } from '../Model/userPost';
 import { LoginService } from '../services/login.service';
 import { PostService } from '../services/post.service';
 import { UserDataService } from '../services/user-data.service';
+import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-admin',
@@ -11,17 +13,18 @@ import { UserDataService } from '../services/user-data.service';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  adminLogin: boolean = false;
+  adminLogin$: Observable<boolean> = this.authService.isAdmin$;
 
   userList: userProfile[] = [];
   postList: UserPost[] = [];
 
-  constructor(private loginService: LoginService, private postService: PostService,
-    private userService: UserDataService) {
+  constructor(private postService: PostService,
+    private userService: UserDataService, private authService: AuthService) {
   }
   ngOnInit(): void {
     this.refreshUser();
     this.refreshPost();
+    console.log("refreshing tables");
   }
   editUser(user: userProfile) {
     console.log(user);

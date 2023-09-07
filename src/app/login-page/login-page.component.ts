@@ -22,6 +22,8 @@ export class LoginPageComponent {
     }
     else if (isSignedIn && usercred.username == "Admin") {
       this.authService.setIsLoggedIn(true);
+      this.authService.setIsAdmin(true);
+
       this.router.navigate(['admin']);
 
     }
