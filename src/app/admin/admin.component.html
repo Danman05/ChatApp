@@ -4,9 +4,9 @@
 </div>
     <div class="dashboard">
         <h3>User Table</h3>
-        <app-admin-board (callEditUser)="test($event)" (callDeleteUser)="test($event)" [userList]="userList"></app-admin-board>
+        <app-admin-board (callEditUser)="editUser($event)" (callDeleteUser)="deleteUser($event)" [userList]="userList"></app-admin-board>
         <h3>Post Table</h3>
-        <app-admin-board-post (callEditPost)="testPost($event)" (callDeletePost)="testPost($event)" [postList]="postList"></app-admin-board-post>
+        <app-admin-board-post (callEditPost)="editPost($event)" (callDeletePost)="deletePost($event)" [postList]="postList"></app-admin-board-post>
     </div>
 
 

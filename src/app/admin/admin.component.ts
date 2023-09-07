@@ -16,35 +16,36 @@ export class AdminComponent implements OnInit {
 
   userList: userProfile[] = [];
   postList: UserPost[] = [];
-  
+
   constructor(private loginService: LoginService, private postService: PostService,
     private userService: UserDataService) {
-    this.adminLogin = loginService.isAdmin;
-
-    this.postService.getPosts().subscribe({
-      next: (data => {
-        this.postList = data;
-        console.log(this.postList);
-      }),
-      error: (error => {
-      })
-    });
-    this.userService.GetData().subscribe({
-      next: (data => {
-        this.userList = data;
-        console.log(this.userList);
-      }),
-      error: (error => {
-      })
-    });
   }
   ngOnInit(): void {
-
+    this.refreshUser();
+    this.refreshPost();
   }
-  test(user : userProfile){
+  editUser(user: userProfile) {
     console.log(user);
   }
-  testPost(post : UserPost) {
+  deleteUser(user: userProfile) {
+    
+    console.log(user);
+  }
+  editPost(post: UserPost) {
     console.log(post);
+  }
+  deletePost(post: UserPost) {
+    console.log(post);
+  }
+
+  refreshUser() {
+    this.userService.GetData().subscribe(res => {
+      this.userList = res;
+    });
+  }
+  refreshPost() {
+    this.postService.getPosts().subscribe(res => {
+      this.postList = res;
+    });
   }
 }
