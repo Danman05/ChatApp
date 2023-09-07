@@ -3,8 +3,10 @@
     
 </div>
     <div class="dashboard">
-        <h1>Admin dashboard</h1>
-        <app-admin-board (callEditUser)="test()" (callDeleteUser)="test()" [userList]="userList" [postList]="postList"></app-admin-board>
+        <h3>User Table</h3>
+        <app-admin-board (callEditUser)="test($event)" (callDeleteUser)="test($event)" [userList]="userList"></app-admin-board>
+        <h3>Post Table</h3>
+        <app-admin-board-post (callEditPost)="testPost($event)" (callDeletePost)="testPost($event)" [postList]="postList"></app-admin-board-post>
     </div>
 
 

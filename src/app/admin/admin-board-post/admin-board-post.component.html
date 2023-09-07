@@ -5,33 +5,35 @@
 
 <mat-paginator [length]="100" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
 </mat-paginator>
-
-<table class="mat-elevation-z8" mat-table [dataSource]="userdataSource">
+<table mat-table [dataSource]="userdataSource">
 
     <ng-container matColumnDef="Buttons">
         <th mat-header-cell *matHeaderCellDef> Buttons </th>
         <td mat-cell *matCellDef="let element">
-            <button mat-button (click)="editUser(element)">Edit</button>
-            <button mat-button (click)="deleteUser(element)">Delete</button>
+            <button mat-button (click)="editPost(element)">Edit</button>
+            <button mat-button (click)="deletePost(element)">Delete</button>
         </td>
     </ng-container>
     <!-- Position Column -->
-    <ng-container matColumnDef="User ID">
-        <th mat-header-cell *matHeaderCellDef> User ID </th>
-        <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+    <ng-container matColumnDef="Post ID">
+        <th mat-header-cell *matHeaderCellDef> Post ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.postId}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Poster User">
+        <th mat-header-cell *matHeaderCellDef> Poster Username </th>
+        <td mat-cell *matCellDef="let element"> {{element.posterUser.username}} </td>
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container matColumnDef="Profile Picture">
-        <th class="lessImportant" mat-header-cell *matHeaderCellDef> Profile Picture </th>
+    <ng-container matColumnDef="Title">
+        <th class="lessImportant" mat-header-cell *matHeaderCellDef> Title </th>
 
-        <td class="lessImportant" mat-cell *matCellDef="let element"><img src="{{element.profilePicturePath}}">
-        </td>
+        <td class="lessImportant" mat-cell *matCellDef="let element"> {{ element.title}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="@Username">
-        <th mat-header-cell *matHeaderCellDef> @Username </th>
-        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+    <ng-container matColumnDef="Content">
+        <th mat-header-cell *matHeaderCellDef> Content </th>
+        <td mat-cell *matCellDef="let element"> {{element.content}} </td>
     </ng-container>
 
     <ng-container matColumnDef="Display Name">
@@ -61,4 +63,5 @@
     <tr class="mat-row" *matNoDataRow>
         <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
     </tr>
+
 </table>

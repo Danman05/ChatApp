@@ -39,10 +39,12 @@ export class AdminComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    // this.userList = this.userService.GetData();
-    // this.postList = this.postService.getPosts();
+
   }
-  test(){
-    console.log("test");
+  test(user : userProfile){
+    console.log(user);
+  }
+  testPost(post : UserPost) {
+    console.log(post);
   }
 }
