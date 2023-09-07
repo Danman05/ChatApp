@@ -1,3 +1,8 @@
+<!--
+     User table component
+     Table is made out from Angular material 
+-->
+
 <mat-form-field>
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
@@ -15,13 +20,12 @@
             <button mat-button (click)="deleteUser(element)">Delete</button>
         </td>
     </ng-container>
-    <!-- Position Column -->
+
     <ng-container matColumnDef="User ID">
         <th mat-header-cell *matHeaderCellDef> User ID </th>
         <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="Profile Picture">
         <th class="lessImportant" mat-header-cell *matHeaderCellDef> Profile Picture </th>
 
