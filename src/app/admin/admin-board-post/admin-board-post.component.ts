@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserPost } from 'src/app/Model/userPost';
@@ -7,7 +7,7 @@ import { UserPost } from 'src/app/Model/userPost';
   templateUrl: './admin-board-post.component.html',
   styleUrls: ['./admin-board-post.component.scss']
 })
-export class AdminBoardPostComponent implements OnChanges{
+export class AdminBoardPostComponent implements OnChanges, AfterViewInit{
   @Input() postList: UserPost[] = [];
 
   @Output() callDeletePost = new EventEmitter<UserPost>();
@@ -22,12 +22,11 @@ export class AdminBoardPostComponent implements OnChanges{
     'Content'
   ];
 
-  @ViewChild(MatPaginator) set paginator(paginator: MatPaginator) {
-    if (paginator) {
-      this.userdataSource.paginator = paginator;
-    }
-  }; 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+    ngAfterViewInit(): void {
+      this.userdataSource.paginator = this.paginator;
+  }
   ngOnChanges(changes: SimpleChanges): void {
     this.userdataSource = new MatTableDataSource<UserPost>(this.postList);
     this.userdataSource.paginator = this.paginator; 

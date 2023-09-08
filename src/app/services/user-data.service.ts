@@ -1,9 +1,11 @@
+//
+// Service which is responsible for user context
+//
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs'
 import { HttpClient } from '@angular/common/http'
 import { userProfile } from '../Model/userProfile';
 import { UserDB } from '../Model/userDbModel';
-
 
 @Injectable({
   providedIn: 'root'

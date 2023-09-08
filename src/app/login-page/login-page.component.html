@@ -1,23 +1,34 @@
-<form onsubmit="return false">
+<!-- 
+    Sign in / Login Page
+ -->
+<form (ngSubmit)="SignIn()">
     <div class="box">
+
+        <ng-container *ngFor="let message of errorMessages">
+            <p class="error-message">{{message}}</p>
+        </ng-container>
+
         <div class="input-container">
-            <input type="text" id="user-input-username" autocomplete="username" required #userCredentialUsername>
+            <input type="text" id="user-input-username" [(ngModel)]="userCred.username" name="username" autocomplete="username" required>
             <label for="user-input-username">Username:</label>
         </div>
+
         <div class="input-container">
-            <input type="password" id="user-input-password" autocomplete="current-password" required #userCredentialPassword>
+            <input type="password" id="user-input-password" [(ngModel)]="userCred.password" name="password" autocomplete="current-password" required>
             <label for="user-input-password">Password:</label>
         </div>
+
         <div class="card-container">
-            <button type="button" (click)="SignIn({username: userCredentialUsername.value, password: userCredentialPassword.value})"
-                class="card card-small" tabindex="0">
+            <button class="card card-small" tabindex="0" type="submit">
                 <span>Sign in</span>
             </button>
         </div>
+
         <div class="signUp">
             <p>Don't have an account? 
                 <a routerLink="/app-signup-page">Sign up here!</a> 
             </p>
         </div>
+
     </div>
 </form>

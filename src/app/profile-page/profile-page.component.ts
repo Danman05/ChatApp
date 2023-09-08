@@ -8,22 +8,26 @@ import { UserFollow } from '../Model/userFollow';
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { EditProfileDialogComponent } from './edit-profile-dialog/edit-profile-dialog.component';
+import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.scss']
 })
 export class ProfilePageComponent implements OnInit {
-  
+
   currentUser!: userProfile;
   ownsAccount: boolean = false;
-  isSignedIn: boolean = false;
+  isSignedIn$: Observable<boolean> = this.authService.isLoggedIn$;
   isFollowingUser = false;
   dialogOpen: boolean = false;
 
   id?: number;
   constructor(private userService: UserDataService, private loginService: LoginService,
-    private followService: FollowService, private route: ActivatedRoute, public dialog: MatDialog) { }
+    private followService: FollowService, private route: ActivatedRoute, public dialog: MatDialog,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     try {
@@ -35,35 +39,13 @@ export class ProfilePageComponent implements OnInit {
       console.log(error);
     }
   }
-
-  followUser() {
-    let userFollow: UserFollow = {
-      thisUserId: this.loginService.signedInUser.userId!,
-      followsUserId: this.id!,
-    }
-    this.followService.follow(userFollow).subscribe({
-      next: (data => {
-        this.getProfileData();
-      }),
-      error: (data => {
-        console.log(data);
-      })
-    })
-  }
-  checkFollow() {
-    let userFollow: UserFollow = {
-      thisUserId: this.loginService.signedInUser.userId!,
-      followsUserId: this.id!,
-    }
-    this.followService.checkFollow(userFollow).subscribe({
-      next: (data => {
-        this.isFollowingUser = data;
-      }),
-      error: (error => {
-        console.log(error);
-      }),
+  
+  editProfile(user: userProfile): void {
+    this.userService.EditUser(user).subscribe(res => {
+      console.log(res);
     });
   }
+
   editProfileDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     if (!this.dialogOpen) {
       this.dialogOpen = true;
@@ -81,33 +63,38 @@ export class ProfilePageComponent implements OnInit {
       });
     }
   }
-  editProfile(user: userProfile): void {
-    this.userService.EditUser(user).subscribe({
-      next: (data => {
-        console.log(data);
-      }),
-      error: (error => {
-
-      })
-    });
-
-  }
 
   getProfileData() {
-    this.userService.GetProfileData(this.id!)
-      .subscribe({
-        next: (result => {
-          this.currentUser = result[0];
-          this.isSignedIn = this.loginService.isSignedIn;
-          if (this.loginService.signedInUser && this.loginService.signedInUser.userId == this.currentUser.userId)
-            this.ownsAccount = true;
-          if (this.isSignedIn && !this.ownsAccount) {
-            this.checkFollow();
-          }
-        }),
-        error: (error => {
-          console.log(error);
-        }),
+    this.userService.GetProfileData(this.id!).subscribe(res => {
+      this.currentUser = res[0];
+      if (this.loginService.signedInUser && this.loginService.signedInUser.userId == this.currentUser.userId)
+        this.ownsAccount = true;
+
+      this.isSignedIn$.subscribe(isSignedIn => {
+        if (isSignedIn && !this.ownsAccount) {
+          this.checkFollow();
+        }
       });
+    });
+  }
+
+  followUser() {
+    let userFollow: UserFollow = {
+      thisUserId: this.loginService.signedInUser.userId!,
+      followsUserId: this.id!,
+    }
+    this.followService.follow(userFollow).subscribe(res => {
+      this.getProfileData();
+    });
+  }
+
+  checkFollow() {
+    let userFollow: UserFollow = {
+      thisUserId: this.loginService.signedInUser.userId!,
+      followsUserId: this.id!,
+    }
+    this.followService.checkFollow(userFollow).subscribe(res => {
+      this.isFollowingUser = res;
+    });
   }
 }

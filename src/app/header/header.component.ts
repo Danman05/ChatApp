@@ -20,6 +20,7 @@ export class HeaderComponent {
   constructor(private authService: AuthService, private router: Router, private loginService: LoginService) {} 
   emitSignOut(): void {
     this.authService.setIsLoggedIn(false);
+    this.authService.setIsAdmin(false);
     this.signOut.emit();
   }
   toggleMenu(): void {

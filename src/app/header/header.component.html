@@ -22,10 +22,6 @@
                     tabindex="0">
                     <span>Sign in / Register</span>
                 </button>
-                <button class="card card-small" routerLink="admin"
-                    tabindex="0">
-                    <span>Admin</span>
-                </button>
                 <button class="card card-small" (click)="emitSignOut()" *ngIf="(isSignedIn$ | async) === true"
                     tabindex="0">
                     <span>Sign out</span>

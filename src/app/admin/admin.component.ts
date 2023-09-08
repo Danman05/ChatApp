@@ -24,33 +24,34 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.refreshUser();
     this.refreshPost();
-    console.log("refreshing tables");
   }
   editUser(user: userProfile) {
     console.log(user);
     this.userService.EditUser(user).subscribe(res => {
       console.log(res);
       this.refreshUser();
-    })
+      this.refreshPost();
+    });
   }
   deleteUser(user: userProfile) {
     console.log(user);
     this.userService.deleteUser(user).subscribe(res => {
       console.log(res);
       this.refreshUser();
-    })
+      this.refreshPost();
+    });
   }
   editPost(post: UserPost) {
     console.log(post);
     this.postService.editPost(post).subscribe(res => {
       console.log(res);
       this.refreshPost();
-    })
+    });
   }
   deletePost(post: UserPost) {
     this.postService.deletePost(post).subscribe(res => {
-    this.refreshPost();
-  })
+      this.refreshPost();
+    });
   }
 
   refreshUser() {

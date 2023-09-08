@@ -59,6 +59,22 @@ public class PostController : ControllerBase
         }
     }
 
+    [HttpGet("UserPosts")]
+    public async Task<ActionResult<List<PostedContent>>> GetUserPosts(int id)
+    {
+        try
+        {
+            return Ok(await _dbContext.PostedContents
+            .Include(p => p.PosterUser)
+            .Where(p => p.PosterUserId == id)
+            .ToListAsync());
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { message = $"An error occurred: {ex.Message}" });
+        }
+    }
+
     /// <summary>
     /// Create a new post
     /// </summary>

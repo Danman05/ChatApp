@@ -1,4 +1,4 @@
-import {Component, EventEmitter,  Input, ViewChild, Output, OnChanges, SimpleChanges } from '@angular/core';
+import {Component, EventEmitter,  Input, ViewChild, Output, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource} from '@angular/material/table';
 import { userProfile } from 'src/app/Model/userProfile';
@@ -8,7 +8,7 @@ import { userProfile } from 'src/app/Model/userProfile';
   templateUrl: './admin-board.component.html',
   styleUrls: ['./admin-board.component.scss'],
 })
-export class AdminBoardComponent implements OnChanges {
+export class AdminBoardComponent implements OnChanges, AfterViewInit {
   @Input() userList: userProfile[] = [];
   
   @Output() callDeleteUser = new EventEmitter<userProfile>();
@@ -26,17 +26,15 @@ export class AdminBoardComponent implements OnChanges {
     'Creation Date'
   ];
 
-  @ViewChild(MatPaginator) set paginator(paginator: MatPaginator) {
-    if (paginator) {
-      this.userdataSource.paginator = paginator;
-      console.log("viewchild");
-    }
-  };
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit(): void {
+    this.userdataSource.paginator = this.paginator
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.userdataSource = new MatTableDataSource<userProfile>(this.userList);
     this.userdataSource.paginator = this.paginator;
-    console.log("ngonchanges");
   }
 
   applyFilter(event: Event) {

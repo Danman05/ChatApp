@@ -55,6 +55,9 @@ a{
     margin-top: 20px;
     color: $webSecondaryColor;
 }
+.error-message {
+    color: red;
+}
 a:hover {
     color: $webGrayHover;
 }

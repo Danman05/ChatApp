@@ -1,83 +1,64 @@
-<div class="box">
+<!-- Error message list -->
 
-    <!-- Error message list -->
-    <div *ngFor="let message of errorMessages">
-        <p class="error-message">{{message}}</p>
-    </div>
+<!-- First part of form -->
 
-    <!-- First part of form -->
+<form (ngSubmit)="onSignUp()">
+    <div class="box">
 
-    <h2>Sign Up</h2>
-    <form (ngSubmit)="onSignUp()">
+        <h2>Sign Up</h2>
 
-        <div *ngIf="!shouldMoveToNextForm">
+        <!-- Error message list -->
+        <div *ngFor="let message of errorMessages">
+            <p class="error-message">{{message}}</p>
+        </div>
+
+        <ng-container *ngIf="!shouldMoveToNextForm">
+
             <div class="input-container">
                 <input id="username-input" type="text" [(ngModel)]="username" name="username" (blur)="checkUsername()"
                     placeholder="@username" autocomplete="username" required>
-                <!-- <label for="username-input">Username</label> -->
             </div>
+
             <div class="input-container">
                 <input id="display-name-input" type="text" [(ngModel)]="displayName" name="displayName"
                     placeholder="display name" required />
-                <!-- <label for="display-name-input">Display Name</label> -->
             </div>
 
-            <!-- <div class="input-container">
-
-                <input id="picture-path-input" type="text" [(ngModel)]="profilePicturePath" name="profilePicturePath"
-                    placeholder="picture path" required />
-                <label for="picture-path-input">Use default image or upload your own</label>
-            </div> -->
             <div class="input-container">
 
-                    <!-- <label for="picture-path-input">Profile Picture:</label> -->
-                    <input type="file" id="picture-path-input" name="profilePicture" (change)="onFileChange($event)"
+                <input type="file" id="picture-path-input" name="profilePicture" (change)="onFileChange($event)"
                     placeholder="Default image" accept="image/*" hidden>
-                    <label for="picture-path-input">Upload image</label>
+                <label for="picture-path-input">Upload image</label>
             </div>
 
-            <!-- Display the uploaded image if available -->
             <div class="input-container" *ngIf="profilePicturePath">
                 Image preview:
-                    <img [src]="profilePicturePath" alt="Profile Picture" width="100">
-             
+                <img [src]="profilePicturePath" alt="Profile Picture" width="100">
             </div>
-            <!-- <div class="input-container default-image">
-                images:
-                <input type="radio" value="../../assets/guest.png" name="profile-image" (change)="onRadioChange($event)"
-                    checked>
-                <input type="radio" value="../../assets/guest2.png" name="profile-image"
-                    (change)="onRadioChange($event)">
-                <input type="radio" value="../../assets/guest3.png" name="profile-image"
-                    (change)="onRadioChange($event)">
-                <img src="{{profilePicturePath}}" *ngIf="profilePicturePath">
-            </div> -->
+
             <button class="card card-small" (click)="shouldMoveToNextForm = true">Next</button>
-        </div>
+        </ng-container>
         <!-- Next part of form -->
-        <div *ngIf="shouldMoveToNextForm">
-            <button class="card card-small backarrow" (click)="shouldMoveToNextForm = false"><-- </button>
+        <ng-container *ngIf="shouldMoveToNextForm">
+            <button class="card card-small backarrow" (click)="shouldMoveToNextForm = false"> <-- </button>
+
                     <div class="input-container">
                         <input id="password-input" type="password" [(ngModel)]="password" name="password"
                             (blur)="checkPassword()" placeholder="password" autocomplete="new-password" required />
-                        <!-- <label for="password-input">Password</label> -->
                     </div>
 
                     <div class="input-container">
                         <input id="password-verify-input" type="password" [(ngModel)]="passwordVerify"
                             name="passwordVerify" (blur)="checkPassword()" placeholder="verify password"
                             autocomplete="new-password" required />
-                        <!-- <label for="password-input">Password</label> -->
                     </div>
 
                     <div class="input-container">
                         Private account: <input id="private-checkbox" type="checkbox" [(ngModel)]="isPrivate"
                             name="isPrivate" required />
-                        <!-- <label for="private-checkbox">Private Account</label> -->
                     </div>
 
-                    <!-- Add more form fields as needed -->
                     <button class="card card-small" type="submit">Sign Up</button>
-        </div>
-    </form>
-</div>
+        </ng-container>
+    </div>
+</form>

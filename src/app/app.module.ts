@@ -28,6 +28,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { AdminBoardPostComponent } from './admin/admin-board-post/admin-board-post.component';
+import { ProfilePostsComponent } from './profile-page/profile-posts/profile-posts.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { AdminBoardPostComponent } from './admin/admin-board-post/admin-board-po
     AdminComponent,
     AdminBoardComponent,
     AdminBoardPostComponent,
+    ProfilePostsComponent,
   ],
   imports: [
     BrowserModule,

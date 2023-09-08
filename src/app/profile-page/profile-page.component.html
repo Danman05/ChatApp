@@ -5,7 +5,7 @@
         <h1>{{ currentUser.displayName}}</h1>
         <h2>@{{ currentUser.username }}</h2>
         <!-- More functionality -->
-        <div *ngIf="isSignedIn">
+        <div *ngIf="(isSignedIn$|async) === true">
             <button class="card card-small" (click)="editProfileDialog('0ms', '0ms')" *ngIf="ownsAccount">Edit Profile</button>
             <button class="card card-small" *ngIf="!ownsAccount && !isFollowingUser" (click)="followUser()">Follow</button>
             <button class="card card-small" *ngIf="!ownsAccount && isFollowingUser" (click)="followUser()">Unfollow</button>
@@ -23,10 +23,20 @@
             </table>
         </div>
     </div>
-    <div class="userInfoBottom">
+
+    <ng-container *ngIf="currentUser.isPrivate">
+        <div class="userInfoBottom">
+            <h3>Private Account</h3>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="!currentUser.isPrivate || ownsAccount">
         <h3>Join Date</h3>
-        <span>{{ currentUser.accountCreationDate | date: 'dd/MM/YYYY'}}</span>
-    </div>
+        <div class="userInfoBottom">
+            <span>{{ currentUser.accountCreationDate | date: 'dd/MM/YYYY'}}</span>
+        </div>
+        <app-profile-posts [currentUser]="currentUser"></app-profile-posts>
+    </ng-container>
 </div>
 
 <div *ngIf="!currentUser">

@@ -10,22 +10,32 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent {
+  userCred: UserCred = {username: "", password: ""};
+  errorMessages: string[] = [];
   constructor(private loginService: LoginService, private router: Router, private authService: AuthService) {
   }
-  async SignIn(usercred: UserCred) {
-    const isSignedIn = await this.loginService.signIn(usercred);
+  async SignIn() {
+    
+    if(!this.userCred.username  || !this.userCred.password) {
+      this.errorMessages[0] = "Fill every field";
+      return;
+    }
+    
+    const isSignedIn: boolean = await this.loginService.signIn(this.userCred);
 
-    if (isSignedIn && usercred.username != "Admin") {
+    if (isSignedIn && this.userCred.username != "Admin") {
       // Navigate to profile page
       this.authService.setIsLoggedIn(true);
       this.router.navigate(['app-profile-page', this.loginService.signedInUser.userId]);
     }
-    else if (isSignedIn && usercred.username == "Admin") {
+    else if (isSignedIn && this.userCred.username == "Admin") {
       this.authService.setIsLoggedIn(true);
       this.authService.setIsAdmin(true);
 
       this.router.navigate(['admin']);
-
+    }
+    else {
+      this.errorMessages[0] = "Login Failed";
     }
   }
 }
