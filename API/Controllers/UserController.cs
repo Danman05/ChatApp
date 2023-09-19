@@ -4,7 +4,8 @@ using API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+using System.Security.Cryptography;
+using System.Text;
 namespace API.Controllers;
 
 [ApiController]
@@ -12,10 +13,11 @@ namespace API.Controllers;
 public class UserController : ControllerBase
 {
     private readonly YeeterDbContext _dbContext;
-
-    public UserController(YeeterDbContext dbContext)
+    private readonly HashingService _hashingService;
+    public UserController(YeeterDbContext dbContext, HashingService hashingService)
     {
         _dbContext = dbContext;
+        _hashingService = hashingService;
     }
 
     /// <summary>
@@ -106,6 +108,8 @@ public class UserController : ControllerBase
             if(user.Password.Length < 7 )
                 return Conflict("Password not long enough");
 
+            user.Password = _hashingService.Hash256(user.Password);
+            
             _dbContext.Users.Add(user);
             await _dbContext.SaveChangesAsync();
 

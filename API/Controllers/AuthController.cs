@@ -10,15 +10,18 @@ public class AuthController : ControllerBase
 {
 
     private readonly YeeterDbContext _dbContext;
+    private readonly HashingService _hashingService;
 
-    public AuthController(YeeterDbContext dbContext)
+    public AuthController(YeeterDbContext dbContext, HashingService hashingService)
     {
         _dbContext = dbContext;
+        _hashingService = hashingService;
     }
     [HttpGet("Login")]
     public async Task<ActionResult<List<ProfileResult>>> LogInUser(string username, string password)
     {
-        return Ok(await _dbContext.ProfileResults.FromSqlInterpolated($@"exec LogInUser @username = {username}, @password = {password}").ToListAsync());
+        string hash = _hashingService.Hash256(password);
+        return Ok(await _dbContext.ProfileResults.FromSqlInterpolated($@"exec LogInUser @username = {username}, @password = {hash}").ToListAsync());
     }
 }
 
