@@ -26,7 +26,7 @@ export class MessageContentComponent implements OnInit {
   }
   
   refreshPostList() {
-    this.postService.getPosts().subscribe({
+    this.postService.getPublicPosts().subscribe({
       next: (data => {
         this.postService.publicPostList = data;
         this.postList = this.postService.publicPostList;
