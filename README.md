@@ -12,6 +12,9 @@ Please don't sue me Elon 😅
 
 This project was intended for learning purposes, to get a better understanding of Angular
 
+If you get errors with the Angular Materials run `ng add @angular/material`
+[Angular Material](https://material.angular.io/guide/getting-started)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.6.
 
 ## Database
